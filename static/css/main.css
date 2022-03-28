@@ -5,6 +5,7 @@
 }
 body {
     font-family: 'Poppins', sans-serif;
+    line-height: 2em;
 }
 .container {
     display: flex;
@@ -103,4 +104,20 @@ nav {
 }
 .form-container ul {
     list-style-type: none;
+}
+
+/* Account Styling */
+
+.account-container {
+    width: 100%;
+    margin-top: 3em;
+    padding: 0 5em;
+    line-height: 3em;
+}
+.account-container h1 {
+    margin-bottom: 1em;
+    font-size: 1.3em;
+}
+.account-container span {
+    font-weight: 500;
 }

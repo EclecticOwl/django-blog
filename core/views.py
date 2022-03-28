@@ -57,8 +57,8 @@ def signout(request):
     messages.success(request, 'You successfully signed out.')
     return redirect('index')
 
-def user_profile(request, pk):
-    profile = Profile.objects.get(pk=pk)
+def user_profile(request):
+    profile = request.user.profile
 
 
     context = {'profile': profile}
