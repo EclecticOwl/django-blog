@@ -6,6 +6,10 @@
 body {
     font-family: 'Poppins', sans-serif;
 }
+.container {
+    display: flex;
+    justify-content: center;
+}
 
 
 /* Navbar */
@@ -16,6 +20,8 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1em 1.5em;
+    font-size: 1.2em;
+    box-shadow: 0 .25em 1em grey;
 }
 .nav-links {
     display: flex;
@@ -26,6 +32,8 @@ nav {
     color: white;
     text-decoration: none;
 }
+
+/* Message Styling */
 .messages {
     display: flex;
     list-style-type: none;
@@ -52,4 +60,40 @@ nav {
     display: flex;
     gap: 2em;
     border-radius: 1.2em;
+}
+
+/* Form Styling */
+
+.form-container {
+    margin-top: 8em;
+    background-color: rgba(0, 0, 0, 0.692);
+    padding: 3em 4em;
+    border-radius: 1em;
+    width: 50em;
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    box-shadow: 0 .25em 1em grey;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.form-container input {
+    border: none;
+    border-radius: 5px;
+    padding: .7em 1em;
+}
+.form-container button {
+    margin-top: 1em;
+    border-radius: 1em;
+    padding: .25em;
+}
+.form-container ul {
+    list-style-type: none;
 }

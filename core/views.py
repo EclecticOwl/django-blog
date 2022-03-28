@@ -26,7 +26,7 @@ def register(request):
     else:
         form = UserCreationForm()
 
-    context = {}
+    context = {'form': form}
     return render(request, 'register.html', context)
 
 def signin(request):
