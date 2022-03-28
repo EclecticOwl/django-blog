@@ -17,8 +17,12 @@ nav {
     align-items: center;
     padding: 1em 1.5em;
 }
-nav ul {
+.nav-links {
     display: flex;
     list-style-type: none;
     gap: 1em;
+}
+.nav-links a {
+    color: white;
+    text-decoration: none;
 }

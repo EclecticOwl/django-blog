@@ -3,14 +3,14 @@
         <span>Django Blog</span>
     </div>
     <div class="main-links">
-        <ul>
+        <ul class="nav-links">
             <li><a href="{% url 'index' %}">Home</a></li>
             {% if user.is_authenticated %}
-            <li>Account</li>
-            <li>Posts</li>
-            <li>Sign Out</li>
+            <li><a href="">Account</a></li>
+            <li><a href="">Posts</a></li>
+            <li><a href="{% url 'logout' %}">Sign Out</a></li>
             {% else %}
-            <li>Sign In</li>
+            <li><a href="{% url 'login' %}">Sign In</a></li>
             {% endif %}
         </ul>
     </div>
