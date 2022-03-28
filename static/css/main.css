@@ -30,10 +30,26 @@ nav {
     display: flex;
     list-style-type: none;
     justify-content: center;
-    gap: 5em;
+    align-items: center;
     padding: 1em 2em;
     margin-top: .5em;
 }
 .messages span {
     cursor: pointer;
+}
+.messages .error {
+    max-height: 100%;
+    background-color: #f03d40;
+    padding: .5em 1em;
+    display: flex;
+    gap: 2em;
+    border-radius: 1.2em;
+}
+.messages .success {
+    max-height: 100%;
+    background-color: limegreen;
+    padding: .5em 1em;
+    display: flex;
+    gap: 2em;
+    border-radius: 1.2em;
 }
