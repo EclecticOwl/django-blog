@@ -60,7 +60,9 @@ def signout(request):
 def user_profile(request, pk):
     profile = Profile.objects.get(pk=pk)
 
-    return render(request, 'profile.html')
+
+    context = {'profile': profile}
+    return render(request, 'profile.html', context)
 
 
 

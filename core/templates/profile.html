@@ -2,7 +2,29 @@
 
 {% block content %}
 
-<h1>Hello</h1>
+<div class="account-container">
+    
+    <div class="account-username">
+        Username: {{ profile.username }}
+    </div>
+    {% if profile.first_name %}
+    <div class="account-first-name">
+        First Name: {{ profile.first_name }}
+    </div>
+    {% endif %}
+    {% if profile.last_name %}
+    <div class="account-last-name">
+        Last Name: {{ profile.last_name }}
+    </div>
+    {% endif %}
+    {% if profile.email %}
+    <div class="account-email">
+        Email: {{ profile.email }}
+    </div>
+    {% endif %}
+
+
+</div>
 
 
 {% endblock content %}
