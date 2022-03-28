@@ -26,3 +26,14 @@ nav {
     color: white;
     text-decoration: none;
 }
+.messages {
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+    gap: 5em;
+    padding: 1em 2em;
+    margin-top: .5em;
+}
+.messages span {
+    cursor: pointer;
+}
