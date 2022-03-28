@@ -1,15 +1,17 @@
 from django.shortcuts import render, redirect
 
 from django.contrib.auth.forms import UserCreationForm
+
 from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate, login, logout
 
 from django.contrib import messages
 
+from .models import Profile
+
 def index(request):
     return render(request, 'index.html')
-
 
 def register(request):
     if request.method == 'POST':
@@ -50,8 +52,18 @@ def signin(request):
     context = {}
     return render(request, 'sign-in.html', context)
 
-
 def signout(request):
     logout(request)
     messages.success(request, 'You successfully signed out.')
     return redirect('index')
+
+def user_profile(request, pk):
+    profile = Profile.objects.get(pk=pk)
+
+    return render(request, 'profile.html')
+
+
+
+
+
+
