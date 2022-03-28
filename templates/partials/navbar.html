@@ -5,8 +5,13 @@
     <div class="main-links">
         <ul>
             <li><a href="{% url 'index' %}">Home</a></li>
+            {% if user.is_authenticated %}
             <li>Account</li>
             <li>Posts</li>
+            <li>Sign Out</li>
+            {% else %}
+            <li>Sign In</li>
+            {% endif %}
         </ul>
     </div>
 </nav>
