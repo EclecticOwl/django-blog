@@ -67,12 +67,16 @@ def edit_user_profile(request):
     form = ProfileForm(instance=profile)
     
     if request.method == 'POST':
-        pass
-    else:
-        pass
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+           form.save()
+           messages.success(request, "Information successfully updated!")
+           return redirect('user-profile')
+        else:
+            messages.error(request, "It appears that something went wrong with the request. Please check your entries and re-submit.")
 
 
-    context = {'profile', profile}
+    context = {'profile': profile, 'form': form}
     return render(request, 'edit_profile.html', context)
 
 

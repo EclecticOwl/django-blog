@@ -23,6 +23,9 @@
            <span> Email:</span> {{ profile.email }}
         </div>
         {% endif %}
+        <div class="account-update">
+            <a href="{% url 'update-user-profile' %}">Update Info</a>
+        </div>
     </div>
 </div>
 
