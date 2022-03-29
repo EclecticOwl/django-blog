@@ -11,6 +11,8 @@ urlpatterns = [
     path('sign-in/', views.signin, name='login'),
     path('sign-out/', views.signout, name='logout'),
 
-    path('profile/', views.user_profile, name='user-profile'),
-    path('profile/edit', views.edit_user_profile, name='update-user-profile'),
+    path('account/', views.user_profile, name='user-profile'),
+    path('account/edit', views.edit_user_profile, name='update-user-profile'),
+
+    path('users/', views.user_list, name='user-list'),
 ]

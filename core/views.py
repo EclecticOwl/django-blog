@@ -79,7 +79,11 @@ def edit_user_profile(request):
     context = {'profile': profile, 'form': form}
     return render(request, 'edit_profile.html', context)
 
+def user_list(request):
+    profiles = Profile.objects.all()
 
+    context = {'profiles': profiles}
+    return render(request, 'users.html', context)
 
 
 

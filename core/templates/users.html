@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="all-users-container">
+
+    {% for profile in profiles %}
+        <div class="profile-card">
+            {{ profile }}
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock content %}
