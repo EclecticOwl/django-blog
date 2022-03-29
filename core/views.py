@@ -1,14 +1,12 @@
 from django.shortcuts import render, redirect
 
 from django.contrib.auth.forms import UserCreationForm
-
 from django.contrib.auth.models import User
-
 from django.contrib.auth import authenticate, login, logout
-
 from django.contrib import messages
 
 from .models import Profile
+from .forms import ProfileForm
 
 def index(request):
     return render(request, 'index.html')
@@ -63,6 +61,19 @@ def user_profile(request):
 
     context = {'profile': profile}
     return render(request, 'profile.html', context)
+
+def edit_user_profile(request):
+    profile = request.user.profile
+    form = ProfileForm(instance=profile)
+    
+    if request.method == 'POST':
+        pass
+    else:
+        pass
+
+
+    context = {'profile', profile}
+    return render(request, 'edit_profile.html', context)
 
 
 
