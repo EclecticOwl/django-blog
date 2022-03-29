@@ -3,14 +3,18 @@
 
 {% block content %}
 
-<div class="edit-account-container">
+<div class="form-container">
+    <h1>Update Information</h1>
     <form action="" method="post">
         {% csrf_token %}
     
         {{ form }}
-        <button type="submit">Update</button>
+
+        <div>
+            <a class="go-back" href="{% url 'user-profile' %}">Go Back</a>
+            <button type="submit">Update</button>
+        </div>
     </form>
-    <a href="{% url 'user-profile' %}"><button>Go Back</button></a>
 </div>
 
 {% endblock content %}

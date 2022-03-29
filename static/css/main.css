@@ -94,17 +94,32 @@ nav {
 .form-container input:focus {
     outline: none;
 }
-.form-container button {
-    margin-top: 8em;
-    border-radius: 1em;
-    padding: .5em;
-    width: 10em;
-    margin: 0 auto;
-    font-family: inherit;
-}
+
 .form-container ul {
     list-style-type: none;
 }
+.form-container div {
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-between;
+    gap: .5em;
+}
+.form-container .go-back, button {
+    border: none;
+    padding: .25em 1em;
+    border-radius: 1.5em;
+    color: white;
+    font-size: inherit;
+}
+.form-container button {
+    background-color: limegreen;
+}
+.go-back {
+    background-color: firebrick;
+    text-decoration: none;
+}
+
+
 
 /* Account Styling */
 
