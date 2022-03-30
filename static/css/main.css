@@ -118,9 +118,6 @@ nav {
     background-color: firebrick;
     text-decoration: none;
 }
-
-
-
 /* Account Styling */
 
 .account-container {
@@ -135,4 +132,19 @@ nav {
 }
 .account-container span {
     font-weight: 500;
+}
+
+/* All Users Page Styling */
+
+.all-users-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 6em;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    max-width: 100%;
+}
+.profile-card {
+    padding: 1em 2em;
 }
