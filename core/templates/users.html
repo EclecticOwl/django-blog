@@ -7,7 +7,9 @@
 
     {% for profile in profiles %}
         <div class="profile-card">
-            {{ profile.username }}
+            <a href="{% url 'user-detail' profile.id %}">
+                {{ profile }}
+            </a>
         </div>
     {% endfor %}
 
