@@ -42,3 +42,11 @@ def post_update(request, id):
 
     context = {'post': post, 'form': form}
     return render(request, 'post_update.html', context)
+
+def post_delete(request, id):
+    post = request.user.profile.posts.get(id=id)
+
+    if request.method == 'POST':
+        print('success')
+    context = {'post': post}
+    return render(request, 'post_delete.html', context)

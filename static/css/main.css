@@ -198,6 +198,9 @@ nav {
     flex-direction: column;
     justify-content: flex-start;
 }
+.posts a {
+    text-decoration: none;
+}
 .posts span {
     margin-left: 2em;
     font-size: .5em;

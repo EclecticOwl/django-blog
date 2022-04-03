@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="form-container">
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Are you sure you wish to delete this post?</p>
+
+        <a href="{% url 'my-posts' %}">Go Back</a>
+        <input type="submit" value='Confirm'>
+    </form>
+</div>
+
+{% endblock %}

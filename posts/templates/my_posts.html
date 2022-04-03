@@ -8,11 +8,14 @@
     <div class="posts">
         {% for post in posts %}
             <div class="post">
-                <a href="{% url 'post-detail' post.id %}"> {{post.description}} </a>
+                <a href="{% url 'post-detail' post.id %}"> 
+                {{post.description}}
                 {{post.content}}
                 {{post.created}}
+                </a>
                 <div>
                     <a href="{% url 'post-update' post.id %}">Edit</a>
+                    <a href="{% url 'post-delete' post.id %}">Delete</a>
                 </div>
             </div>
         {% endfor %}
