@@ -6,9 +6,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 from .models import Profile
+from posts.models import Post
+
 from .forms import ProfileForm
 
 def index(request):
+
     return render(request, 'index.html')
 
 def register(request):

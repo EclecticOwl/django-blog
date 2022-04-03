@@ -11,3 +11,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.description
+
+
+class Follower(models.Model):
+    follower = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="follower")
+    following = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="following")
+
+    def __str__(self):
+        return f'{self.follower} is following {self.following}'
