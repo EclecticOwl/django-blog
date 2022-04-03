@@ -111,8 +111,15 @@ nav {
     color: white;
     font-size: inherit;
 }
+.form-container textarea {
+    height: 4em;
+    border-radius: 1.5em;;
+    padding: 1em;
+    max-width: 100%;
+}
 .form-container button {
     background-color: limegreen;
+    padding: .5em 0;
 }
 .go-back {
     background-color: firebrick;
@@ -173,12 +180,6 @@ nav {
     padding: 1em;
     max-width: 100%;
     border-radius: 1.5em;
-}
-.new_post_container textarea {
-    height: 4em;
-    border-radius: 1.5em;;
-    padding: 1em;
-    max-width: 100%;
 }
 .post_container {
     margin-top: 3em;

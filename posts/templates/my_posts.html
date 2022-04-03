@@ -11,6 +11,9 @@
                 <a href="{% url 'post-detail' post.id %}"> {{post.description}} </a>
                 {{post.content}}
                 {{post.created}}
+                <div>
+                    <a href="{% url 'post-update' post.id %}">Edit</a>
+                </div>
             </div>
         {% endfor %}
     </div>
