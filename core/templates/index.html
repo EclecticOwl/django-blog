@@ -3,6 +3,21 @@
 
 {% block content %}
 
-<h1>Hello World!</h1>
+{% if request.user.is_authenticated %}
+<div class="feed_container">
+    {% for obj in profile_feed %}
+
+    <div class="post">
+        <h2>
+            {{ obj.owner }}
+        </h2>
+        <p>
+            {{ obj.content }} <span>{{ obj.created }}</span>
+        </p>
+    </div>
+
+    {% endfor %}
+</div>
+{% endif %}
 
 {% endblock %}

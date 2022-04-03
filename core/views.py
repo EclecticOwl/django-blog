@@ -11,8 +11,16 @@ from posts.models import Post
 from .forms import ProfileForm
 
 def index(request):
+    profile_followers = request.user.profile.following.all()
+    feed_array = []
 
-    return render(request, 'index.html')
+    for item in profile_followers:
+        feed_array.append(item.id)
+
+    profile_feed = Post.objects.filter(owner_id__in=feed_array)
+    
+    context = { 'profile_feed': profile_feed }
+    return render(request, 'index.html', context)
 
 def register(request):
     if request.method == 'POST':
