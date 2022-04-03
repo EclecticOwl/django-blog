@@ -13,10 +13,16 @@ def all_post_list(request):
     context = {'page_obj': page_obj}
     return render(request, 'post_list.html', context)
 
-def my_posts(request):
+def post_list(request):
     user = request.user.profile
 
     posts = Post.objects.filter(owner=user)
 
     context = {'posts': posts}
     return render(request, 'my_posts.html', context)
+
+def post_detail(request, id):
+    post = Post.objects.get(id=id)
+
+    context = {'post': post}
+    return render(request, 'post_detail.html', context)

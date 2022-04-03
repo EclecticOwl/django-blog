@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="post_container">
+    <h1>Post</h1>
+    <h2>
+        {{post.owner}}
+    </h2>
+    <p>
+        {{post.content}}
+        {{post.created}}
+    </p>
+</div>
+{% endblock %}
