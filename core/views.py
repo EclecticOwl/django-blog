@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
@@ -12,12 +11,8 @@ from .forms import ProfileForm
 
 def index(request):
     profile_followers = request.user.profile.following.all()
-    feed_array = []
 
-    for item in profile_followers:
-        feed_array.append(item.id)
-
-    profile_feed = Post.objects.filter(owner_id__in=feed_array)
+    profile_feed = Post.objects.filter(owner_id__in=profile_followers).order_by('-created')
     
     context = { 'profile_feed': profile_feed }
     return render(request, 'index.html', context)
