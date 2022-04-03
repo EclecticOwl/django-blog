@@ -3,6 +3,28 @@
 
 {% block content %}
 
-    {{ profile }}
+<div class="account-container">
+    <div class="account-info">
+        <h1>Account Information</h1>
+        <div class="account-username">
+            <span>Username:</span> {{ profile.username }}
+        </div>
+        {% if profile.first_name %}
+        <div class="account-first-name">
+            <span>First Name:</span> {{ profile.first_name }}
+        </div>
+        {% endif %}
+        {% if profile.last_name %}
+        <div class="account-last-name">
+            <span>Last Name:</span> {{ profile.last_name }}
+        </div>
+        {% endif %}
+        {% if profile.email %}
+        <div class="account-email">
+           <span> Email:</span> {{ profile.email }}
+        </div>
+        {% endif %}
+    </div>
+</div>
 
 {% endblock content %}
