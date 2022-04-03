@@ -157,3 +157,24 @@ nav {
     width: 100%;
     padding: 0 5em;
 }
+.post_container {
+    margin-top: 3em;
+    width: 100%;
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.posts {
+    padding-left: 5em;
+    width: 100%;
+    gap: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.posts span {
+    margin-left: 2em;
+    font-size: .5em;
+}
