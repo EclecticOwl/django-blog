@@ -12,6 +12,8 @@ class Profile(models.Model):
     email = models.EmailField(max_length=300, blank=True, null=True)
     username = models.CharField(max_length=200, blank=True, null=True)
 
+    following = models.ManyToManyField('self', symmetrical=False, related_name='followers', blank=True, null=True)
+
     def __str__(self):
         return self.username
 
