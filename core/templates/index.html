@@ -20,11 +20,16 @@
     
         <div class="post">
             <h3>
-                {{ obj.owner }} posted:
+                <a href="{% url 'user-detail' obj.owner.id %}">{{obj.owner}}</a>
+                posted:
             </h3>
-            <p>
-                "{{ obj.content }}" <span> on: {{ obj.created }}</span>
-            </p>
+            <div class="post-description">
+                Subject: {{obj.description}}
+            </div>
+            <div class="post_body">
+                <p>"{{obj.content}}"</p>
+                <span> on: {{obj.created}}</span>
+            </div>
         </div>
     
         {% endfor %}

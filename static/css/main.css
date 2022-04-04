@@ -134,18 +134,45 @@ nav {
 }
 /* Account Styling */
 
-.account-container {
+.account_container {
+    display: flex;
+    justify-content: center;
     width: 100%;
     margin-top: 3em;
     padding: 0 5em;
     line-height: 3em;
 }
-.account-container h1 {
+.account_info {
+    background-color:rgba(0, 0, 0, 0.692);
+    padding: 2em;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    color: white;
+    border-radius: 1em;
+}
+.account_container h1 {
     margin-bottom: 1em;
     font-size: 1.3em;
 }
-.account-container span {
+.account_container span {
     font-weight: 500;
+}
+.account_update a {
+    text-decoration: none;
+    background-color: limegreen;
+    padding: 0 1em;
+    border-radius: 1em;
+    color: inherit;
+}
+.account_update {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* All Users Page Styling */

@@ -2,28 +2,28 @@
 
 {% block content %}
 
-<div class="account-container">
-    <div class="account-info">
+<div class="account_container">
+    <div class="account_info">
         <h1>Account Information</h1>
-        <div class="account-username">
+        <div class="account_username">
             <span>Username:</span> {{ profile.username }}
         </div>
         {% if profile.first_name %}
-        <div class="account-first-name">
+        <div class="account_first_name">
             <span>First Name:</span> {{ profile.first_name }}
         </div>
         {% endif %}
         {% if profile.last_name %}
-        <div class="account-last-name">
+        <div class="account_last_name">
             <span>Last Name:</span> {{ profile.last_name }}
         </div>
         {% endif %}
         {% if profile.email %}
-        <div class="account-email">
+        <div class="account_email">
            <span> Email:</span> {{ profile.email }}
         </div>
         {% endif %}
-        <div class="account-update">
+        <div class="account_update">
             <a href="{% url 'update-user-profile' %}">Update Info</a>
         </div>
     </div>
