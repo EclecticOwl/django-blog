@@ -15,14 +15,15 @@
         </form>
     </div>
     <div class="feed_container">
+        <h2>Recent Posts:</h2>
         {% for obj in profile_feed %}
     
         <div class="post">
-            <h2>
-                {{ obj.owner }}
-            </h2>
+            <h3>
+                {{ obj.owner }} posted:
+            </h3>
             <p>
-                {{ obj.content }} <span>{{ obj.created }}</span>
+                "{{ obj.content }}" <span> on: {{ obj.created }}</span>
             </p>
         </div>
     

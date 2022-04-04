@@ -17,7 +17,7 @@ def all_post_list(request):
 
 def post_list(request):
     user = request.user.profile
-    posts = Post.objects.filter(owner=user)
+    posts = Post.objects.filter(owner=user).order_by('-created')
 
     context = {'posts': posts}
     return render(request, 'my_posts.html', context)
