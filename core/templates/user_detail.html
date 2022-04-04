@@ -25,9 +25,15 @@
         </div>
         {% endif %}
         {% if request.user.profile in profile.followers.all %}
-        <p>Unfollow</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit">Unfollow</button>
+        </form>
         {% else %}
-        <p>Follow</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit">Follow</button>
+        </form>
         {% endif %}
     </div>
 </div>

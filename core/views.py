@@ -114,6 +114,11 @@ def user_list(request):
 def user_detail(request, pk):
     profile = Profile.objects.get(id=pk)
 
+    if request.method == 'POST':
+        if request.user.profile in profile.followers.all():
+            request.user.profile.following.remove(profile)
+        else:
+            request.user.profile.following.add(profile)
 
     context = {'profile': profile}
     return render(request, 'user_detail.html', context)
