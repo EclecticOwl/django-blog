@@ -24,6 +24,11 @@
            <span> Email:</span> {{ profile.email }}
         </div>
         {% endif %}
+        {% if request.user.profile in profile.followers.all %}
+        <p>Unfollow</p>
+        {% else %}
+        <p>Follow</p>
+        {% endif %}
     </div>
 </div>
 

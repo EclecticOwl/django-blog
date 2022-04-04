@@ -18,10 +18,6 @@ class Profile(models.Model):
         return self.username
 
 
-
-
-
-
 # The following is for signals to connect the user model and the profile model
 
 @receiver(post_save, sender=User)
