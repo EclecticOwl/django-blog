@@ -6,9 +6,17 @@
     <div class="posts">
         {% for obj in page_obj %}
             <div class="post">
-               <h2><a href="{% url 'user-detail' obj.owner.id %}">Posted by: {{ obj.owner }}</a></h2>
-               <h4>Subject: {{ obj.description }}</h4>
-               <p>Content: {{ obj.content }}<span>Created on: {{ obj.created }}</span></p>
+                <h3>
+                    <a href="{% url 'user-detail' obj.owner.id %}">{{obj.owner}}</a>
+                    posted:
+                </h3>
+                <div class="post-description">
+                    Subject: {{obj.description}}
+                </div>
+                <div class="post_body">
+                    <p>"{{obj.content}}"</p>
+                    <span> on: {{obj.created}}</span>
+                </div>
             </div>
         {% endfor %}
     </div>
