@@ -8,6 +8,17 @@
         <h1>Account Information</h1>
         <div class="account-username">
             <span>Username:</span> {{ profile.username }}
+            {% if request.user.profile in profile.followers.all %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <button class='profile_unfollow' type="submit">Unfollow</button>
+            </form>
+            {% else %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <button class='profile_follow' type="submit">Follow</button>
+            </form>
+            {% endif %}
         </div>
         {% if profile.first_name %}
         <div class="account-first-name">
@@ -23,17 +34,6 @@
         <div class="account-email">
            <span> Email:</span> {{ profile.email }}
         </div>
-        {% endif %}
-        {% if request.user.profile in profile.followers.all %}
-        <form action="" method="post">
-            {% csrf_token %}
-            <button type="submit">Unfollow</button>
-        </form>
-        {% else %}
-        <form action="" method="post">
-            {% csrf_token %}
-            <button type="submit">Follow</button>
-        </form>
         {% endif %}
     </div>
 </div>

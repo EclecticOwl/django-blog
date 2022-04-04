@@ -174,7 +174,20 @@ nav {
     justify-content: center;
     align-items: center;
 }
-
+.account-username {
+    display: flex;
+    gap: .25em;
+}
+.profile_follow, .profile_unfollow {
+    font-size: .75em;
+    font-family: inherit;
+}
+.profile_unfollow {
+    background-color: firebrick;
+}
+.profile_follow {
+    background-color: limegreen;
+}
 /* All Users Page Styling */
 
 .all-users-container {
