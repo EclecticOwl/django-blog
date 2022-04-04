@@ -11,28 +11,30 @@ from posts.forms import CustomPostForm
 from .forms import ProfileForm
 
 def index(request):
-    profile_followers = request.user.profile.following.all()
-    profile_feed = Post.objects.filter(owner_id__in=profile_followers).order_by('-created')
-
-    form = CustomPostForm()
-    
-    if request.method == 'POST':
-        form = CustomPostForm(request.POST)
-
-        if form.is_valid():
-
-            user = form.save(commit=False)
-            user.owner = request.user.profile
-            user.save()
-
-            messages.success(request, 'New post created successfully!')
-            
-        else:
-            print('Error')
+    if request.user.is_anonymous:
+        context = {}
     else:
-        form
+        profile_followers = request.user.profile.following.all()
+        profile_feed = Post.objects.filter(owner_id__in=profile_followers).order_by('-created')
 
-    context = { 'profile_feed': profile_feed, 'form': form }
+        form = CustomPostForm()
+        
+        if request.method == 'POST':
+            form = CustomPostForm(request.POST)
+
+            if form.is_valid():
+
+                user = form.save(commit=False)
+                user.owner = request.user.profile
+                user.save()
+
+                messages.success(request, 'New post created successfully!')
+                
+            else:
+                print('Error')
+        else:
+            form
+        context = {'profile_feed': profile_feed, 'form': form}
     return render(request, 'index.html', context)
 
 def register(request):

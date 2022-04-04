@@ -3,8 +3,7 @@
 
 {% block content %}
 
-{% if request.user.is_authenticated %}
-
+{% if not request.user.is_anonymous %}
 <div class="index-container">
     <div class="form-container new_post_container">
         <h1>New Post</h1>
@@ -35,6 +34,8 @@
         {% endfor %}
     </div>
 </div>
+{% else %}
+
 {% endif %}
 
 {% endblock %}
