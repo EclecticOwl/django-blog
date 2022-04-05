@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
-
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from .models import Profile
 from posts.models import Post
@@ -82,6 +81,7 @@ def signout(request):
     messages.success(request, 'You successfully signed out.')
     return redirect('index')
 
+@login_required(login_url='login')
 def user_profile(request):
     profile = request.user.profile
 
@@ -89,6 +89,7 @@ def user_profile(request):
     context = {'profile': profile}
     return render(request, 'profile.html', context)
 
+@login_required(login_url='login')
 def edit_user_profile(request):
     profile = request.user.profile
     form = ProfileForm(instance=profile)
@@ -106,12 +107,14 @@ def edit_user_profile(request):
     context = {'profile': profile, 'form': form}
     return render(request, 'edit_profile.html', context)
 
+@login_required(login_url='login')
 def user_list(request):
     profiles = Profile.objects.all()
 
     context = {'profiles': profiles}
     return render(request, 'users.html', context)
 
+@login_required(login_url='login')
 def user_detail(request, pk):
     profile = Profile.objects.get(id=pk)
 
@@ -124,6 +127,7 @@ def user_detail(request, pk):
     context = {'profile': profile}
     return render(request, 'user_detail.html', context)
 
+@login_required(login_url='login')
 def change_password(request):
     user = request.user
 

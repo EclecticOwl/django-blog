@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from .models import Post
 from .forms import CustomPostForm
 
+@login_required(login_url='login')
 def all_post_list(request):
     posts = Post.objects.all()
 
@@ -15,6 +17,7 @@ def all_post_list(request):
     context = {'page_obj': page_obj}
     return render(request, 'post_list.html', context)
 
+@login_required(login_url='login')
 def post_list(request):
     user = request.user.profile
     posts = Post.objects.filter(owner=user).order_by('-created')
@@ -22,12 +25,14 @@ def post_list(request):
     context = {'posts': posts}
     return render(request, 'my_posts.html', context)
 
+@login_required(login_url='login')
 def post_detail(request, id):
     post = Post.objects.get(id=id)
 
     context = {'post': post}
     return render(request, 'post_detail.html', context)
 
+@login_required(login_url='login')
 def post_update(request, id):
     post = request.user.profile.posts.get(id=id)
 
@@ -43,6 +48,7 @@ def post_update(request, id):
     context = {'post': post, 'form': form}
     return render(request, 'post_update.html', context)
 
+@login_required(login_url='login')
 def post_delete(request, id):
     post = request.user.profile.posts.get(id=id)
 
