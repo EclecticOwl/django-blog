@@ -35,6 +35,8 @@ nav {
     color: white;
     text-decoration: none;
 }
+
+
 /* Message Styling */
 .messages {
     display: flex;
@@ -64,14 +66,15 @@ nav {
     border-radius: 1.2em;
 }
 
-/* Form Styling */
 
+/* Form Styling */
 .form-container {
     margin: 2em auto 0 auto;
     background-color: rgba(0, 0, 0, 0.692);
-    padding: 3em 4em;
+    padding: 3em 2em;
     border-radius: 1em;
-    max-width: 100%;
+    width: 100%;
+    max-width: 600px;
     display: flex;
     gap: 2em;
     flex-direction: column;
@@ -125,6 +128,7 @@ nav {
     outline: none;
 }
 .form-container button {
+    margin-top: 1em;
     background-color: limegreen;
     padding: .5em 0;
 }
