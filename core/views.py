@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.contrib import messages
 
 from .models import Profile
@@ -123,3 +124,20 @@ def user_detail(request, pk):
     context = {'profile': profile}
     return render(request, 'user_detail.html', context)
 
+def change_password(request):
+    user = request.user
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Password changed successfully. Please re-sign in.')
+            return redirect('index')
+        else:
+            messages.error(request, 'It appears one of the fields was incorrect. Please check your entries and try again.')
+
+    else:
+        form = PasswordChangeForm(user)
+
+    context = {'form': form}
+    return render(request, 'change_password.html', context)
