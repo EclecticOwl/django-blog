@@ -3,7 +3,10 @@ from django.urls import reverse
 
 from django.contrib.auth.models import User
 from core.models import Profile
+from posts.models import Post
 
+
+######## Model Testing ########
 
 class UserToProfileModelTest(TestCase):
     
@@ -80,8 +83,42 @@ class TestProfileModel(TestCase):
 
         self.assertNotIn(profile, profile2.followers.all())
 
-class IndexTest(TestCase):
 
+######## View Testing ########
+
+class IndexPageTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        User.objects.create(
+            username='bob',
+            password='kjlekjxlKe13i'
+        )
+        User.objects.create(
+            username='bob2',
+            password='kjlekjxlJJJJJ'
+        )
+
+        user = User.objects.get(id=1)
+        user.set_password('kjlekjxlKe13i')
+        user.save()
+
+        profile = Profile.objects.get(id=1)
+        profile2 = Profile.objects.get(id=2)
+
+        profile.following.add(profile2)
+
+        num_posts = 10
+
+        for i in range(num_posts):
+            Post.objects.create(
+                owner=profile2,
+                description=f'{i}',
+                content=f'{i}',
+            )
+        
+
+    ### General Testing ###
     def test_view_url_exists_at_desired_location(self):
         response = self.client.get('')
         self.assertEqual(response.status_code, 200)
@@ -93,3 +130,24 @@ class IndexTest(TestCase):
     def test_correct_template(self):
         response = self.client.get(reverse('index'))
         self.assertTemplateUsed(response, 'index.html')
+
+    def test_if_correct_num_posts_displayed(self):
+        self.client.login(username='bob', password='kjlekjxlKe13i')
+        response = self.client.get(reverse('index'))
+
+        self.assertTrue(response.context['profile_feed'])
+        self.assertEqual(len(response.context['profile_feed']), 10)
+
+    def test_if_profile_feed_displays_for_anonymous(self):
+        response = self.client.get(reverse('index'))
+
+        self.assertFalse('profile_feed' in response.context)
+
+class RegisterPageTestCase(TestCase):
+
+    def test
+    
+    
+
+        
+
