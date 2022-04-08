@@ -189,7 +189,32 @@ class LoginPageTest(TestCase):
 
         self.assertTrue(str(check_user_type) == 'AnonymousUser')
 
-
+class UserProfilePageTest(TestCase):
+    
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create(
+            username='bob',
+            password='kjlekjxlKe13i'
+        )
+        cls.user.set_password('kjlekjxlKe13i')
+        cls.user.save()
+    
+    def test_view_url_exists_at_desired_location(self):
+        login = self.client.login(username='bob', password='kjlekjxlKe13i')
+        response = self.client.get('/account/')
+        self.assertEqual(response.status_code, 200)
+    
+    def test_view_url_access_by_name(self):
+        login = self.client.login(username='bob', password='kjlekjxlKe13i')
+        response = self.client.get(reverse('user-profile'))
+        self.assertEqual(response.status_code, 200)
+    
+    def test_correct_template(self):
+        login = self.client.login(username='bob', password='kjlekjxlKe13i')
+        response = self.client.get(reverse('user-profile'))
+        self.assertTemplateUsed('profile.html')
+        
 
 
 
