@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-
+from django.contrib.messages import get_messages
 from django.contrib.auth.models import User
 from core.models import Profile
 from posts.models import Post
@@ -143,11 +143,63 @@ class IndexPageTest(TestCase):
 
         self.assertFalse('profile_feed' in response.context)
 
-class RegisterPageTestCase(TestCase):
+class RegisterPageTest(TestCase):
 
-    def test
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get('/register/')
+        self.assertEqual(response.status_code, 200)
     
+    def test_view_url_access_by_name(self):
+        response = self.client.get(reverse('register'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_correct_template(self):
+        response = self.client.get(reverse('register'))
+        self.assertTemplateUsed(response, 'register.html')
     
+class LoginPageTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create(
+            username='bob',
+            password='kjlekjxlKe13i'
+        )
+        cls.user.set_password('kjlekjxlKe13i')
+        cls.user.save()
+
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get('/sign-in/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_url_access_by_name(self):
+        response = self.client.get(reverse('login'))
+        self.assertEqual(response.status_code, 200)
+    
+    def test_login_successful(self):
+        response = self.client.post('/sign-in/', 
+            {'username': 'bob', 'password': 'kjlekjxlKe13i'})
+
+        self.assertEqual(response.status_code, 302)
+
+    def test_login_unsuccessful(self):
+        response = self.client.post('/sign-in/', 
+            {'username': 'bob', 'password': 'kjjfjdka'})
+        check_user_type = response.context['user']
+
+        self.assertTrue(str(check_user_type) == 'AnonymousUser')
+
+
+
+
+
+
+
+
 
         
+        
+
+
+
 
