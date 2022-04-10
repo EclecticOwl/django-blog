@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 
     'core',
     'posts',
+    'messages',
 ]
 
 MIDDLEWARE = [
