@@ -3,6 +3,18 @@
 
 {% block content %}
 
-    {{ message }}
+    <div class="messages_container">
+        <div class="message_detail">
+            <div>
+                <h3>Message to:</h3>
+                <p>{{ message.sender.username }}</p>
+                <p>{{ message.created_on }}</p>
+            </div>
+            <div>
+                <h3>Subject: {{ message.subject }}</h3>
+                <p>{{ message.content }}</p>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

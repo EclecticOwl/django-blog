@@ -341,3 +341,33 @@ nav {
 .profile_message_content a:hover {
     text-decoration: underline;
 }
+.message_detail {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    border: 1px solid rgba(0, 0, 0, 0.801);
+    border-radius: 1em;
+    overflow: hidden;
+    box-shadow: 0 .25em 1em grey;
+}
+.message_detail p:nth-child(3) {
+    font-size: .5em;
+}
+.message_detail div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.801);
+    color: white;
+    padding: 2em;
+}
+.message_detail div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+}
