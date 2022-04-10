@@ -1,3 +1,11 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Message
+
+
+def message_list(request):
+    user = request.user.profile
+    inbox = Message.objects.filter(receiver=user)
+
+    context = {'inbox': inbox}
+    return render(request, 'messages.html', context)

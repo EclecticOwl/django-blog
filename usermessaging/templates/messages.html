@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+
+    <div class="messages_container">
+        <h1>My Inbox</h1>
+
+        {% for message in inbox %}
+        
+            <div class="profile-message">
+                <p>From {{ message.sender.username }}</p>
+                <p> {{message.content }} <span>at: {{ message.created_on }}</span></p>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock content %}
