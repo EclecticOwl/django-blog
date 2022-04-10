@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from .models import Message
+from core.models import Profile
+
+from .forms import CustomMessageForm
 
 @login_required(login_url='login')
 def message_inbox(request):
@@ -33,3 +37,26 @@ def message_detail_outbox(request, id):
 
     context = {'message': message}
     return render(request, 'user_outbox.html', context)
+
+
+@login_required(login_url='login')
+def send_message(request, id):
+    recipient = Profile.objects.get(id=id)
+    form = CustomMessageForm()
+
+    if request.method == 'POST':
+        form = CustomMessageForm(request.POST)
+        if form.is_valid():
+            user_message = form.save(commit=False)
+            user_message.receiver = recipient
+            user_message.sender = request.user.profile
+            form.save()
+            messages.success(request, 'Your message has been sent.')
+            return redirect('index')
+
+        else:
+            messages.error(request, 'It appears some of the fields are incorrect or not filled in correctly. Please check and try again.')
+
+
+    context = {'recipient': recipient, 'form': form}
+    return render(request, 'send_message.html', context)
