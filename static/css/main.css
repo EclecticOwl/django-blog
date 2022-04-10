@@ -300,3 +300,31 @@ nav {
     justify-content: center;
     align-items: center;
 }
+.messages_container {
+    margin-top: 5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.inbox_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.profile_message {
+    margin-top: 2em;
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
+    border-spacing: 0 0;
+}
+.profile_message_labels td {
+    padding: 2em 0;
+}
+.profile_message .profile_message_content:nth-child(odd) {
+    background-color: rgb(221, 219, 219);
+}
