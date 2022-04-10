@@ -7,6 +7,6 @@ urlpatterns = [
 
     path('', include('core.urls')),
     path('posts/', include('posts.urls')),
-    path('messages/', include('messages.urls')),
+    path('messages/', include('usermessaging.urls')),
     
 ]
