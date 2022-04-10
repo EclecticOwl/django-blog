@@ -14,12 +14,12 @@
                     <td>Read</td>
                 </tr>
                 {% for message in inbox %}
-                <tr class='profile_message_content'>
-                    <td><a href="{% url 'user-detail' message.sender.id %}">{{message.sender.username}}</a></td>
-                    <td>{{message.content}}</td>
-                    <td>{{message.created_on}}</td>
-                    <td>{{message.is_read}}</td>
-                </tr>
+                    <tr class='profile_message_content' id='profile_message_content' data-href="{% url 'message_detail' message.id %}">
+                            <td><a href="{% url 'user-detail' message.sender.id %}">{{message.sender.username}}</a></td>
+                            <td>{{message.content}}</td>
+                            <td>{{message.created_on}}</td>
+                            <td>{{message.is_read}}</td>
+                    </tr>
                 {% endfor %}
             </table>
         </div>
