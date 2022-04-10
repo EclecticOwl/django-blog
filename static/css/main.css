@@ -300,6 +300,8 @@ nav {
     justify-content: center;
     align-items: center;
 }
+
+/* Messaging Styling */
 .messages_container {
     margin-top: 5em;
     display: flex;
@@ -324,7 +326,18 @@ nav {
 }
 .profile_message_labels td {
     padding: 2em 0;
+    font-size: 1.2em;
 }
 .profile_message .profile_message_content:nth-child(odd) {
     background-color: rgb(221, 219, 219);
+}
+.profile_message_content td {
+    padding: .25em 0;
+}
+.profile_message_content a {
+    text-decoration: none;
+    color: inherit;
+}
+.profile_message_content a:hover {
+    text-decoration: underline;
 }
