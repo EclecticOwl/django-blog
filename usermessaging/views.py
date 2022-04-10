@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import Message
 
 
-def message_list(request):
+def message_inbox(request):
     user = request.user.profile
     inbox = Message.objects.filter(receiver=user)
 
