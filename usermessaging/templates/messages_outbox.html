@@ -4,21 +4,20 @@
 {% block content %}
 
     <div class="messages_container">
-        <h1>My Inbox</h1>
+        <h1>My Outbox</h1>
+        <h4><a href="{% url 'message_inbox' %}">Go to Outbox</a></h4>
         <div class="inbox_container">
             <table class="profile_message">
                 <tr class="profile_message_labels">
-                    <td>From</td>
+                    <td>Sent To</td>
                     <td>Body</td>
                     <td>Sent</td>
-                    <td>Read</td>
                 </tr>
-                {% for message in inbox %}
-                    <tr class='profile_message_content' id='profile_message_content' data-href="{% url 'message_detail' message.id %}">
-                            <td><a href="{% url 'user-detail' message.sender.id %}">{{message.sender.username}}</a></td>
+                {% for message in outbox %}
+                    <tr class='profile_message_content' id='profile_message_content' data-href="{% url 'message_detail_outbox' message.id %}">
+                            <td><a href="{% url 'user-detail' message.receiver.id %}">{{message.receiver.username}}</a></td>
                             <td>{{message.content}}</td>
                             <td>{{message.created_on}}</td>
-                            <td>{{message.is_read}}</td>
                     </tr>
                 {% endfor %}
             </table>
