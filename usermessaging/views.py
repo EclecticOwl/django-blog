@@ -7,13 +7,19 @@ from core.models import Profile
 
 from .forms import CustomMessageForm
 
+def message_home(request):
+
+
+    context = {}
+    return render(request, 'messages_home.html', context)
+
 @login_required(login_url='login')
 def message_inbox(request):
     user = request.user.profile
     inbox = Message.objects.filter(receiver=user)
 
     context = {'inbox': inbox}
-    return render(request, 'messages_inbox.html', context)
+    return render(request, 'partials/messages_inbox.html', context)
 
 @login_required(login_url='login')
 def message_outbox(request):

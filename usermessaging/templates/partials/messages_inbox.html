@@ -1,9 +1,5 @@
-{% extends 'base.html'%}
 
-
-{% block content %}
-
-    <div class="messages_container">
+   <div class="messages_container" hx-get="{% url 'message_inbox' %}" hx-trigger="every 5s">
         <h1>My Inbox</h1>
         <h4><a href="{% url 'message_outbox' %}">Go to Outbox</a></h4>
         <div class="inbox_container">
@@ -25,5 +21,3 @@
             </table>
         </div>
     </div>
-
-{% endblock content %}

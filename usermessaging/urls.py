@@ -3,6 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('', views.message_home, name="messages_home"),
+
     path('inbox/', views.message_inbox, name='message_inbox'),
     path('outbox/', views.message_outbox, name='message_outbox'),
     path('inbox/<int:id>/', views.message_detail_inbox, name='message_detail_inbox'),
