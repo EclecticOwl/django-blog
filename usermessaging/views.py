@@ -7,6 +7,8 @@ from core.models import Profile
 
 from .forms import CustomMessageForm
 
+
+@login_required(login_url='login')
 def message_home(request):
 
 
@@ -27,7 +29,7 @@ def message_outbox(request):
     outbox = Message.objects.filter(sender=user)
 
     context = {'outbox': outbox}
-    return render(request, 'messages_outbox.html', context)
+    return render(request, 'partials/messages_outbox.html', context)
 
 @login_required(login_url='login')
 def message_detail_inbox(request, id):

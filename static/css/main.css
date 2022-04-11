@@ -379,6 +379,11 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: .5em;
+}
+.messages_control button {
+    background-color:rgba(0, 0, 0, 0.692);
+    box-shadow: 0 .25em .75em grey;
 }
 .messages_container {
     display: flex;
