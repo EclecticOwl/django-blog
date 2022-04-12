@@ -10,8 +10,6 @@ from .forms import CustomMessageForm
 
 @login_required(login_url='login')
 def message_home(request):
-
-
     context = {}
     return render(request, 'messages_home.html', context)
 
