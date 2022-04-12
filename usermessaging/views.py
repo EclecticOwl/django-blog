@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
+
 
 from .models import Message
 from core.models import Profile
@@ -9,10 +10,11 @@ from core.models import Profile
 from .forms import CustomMessageForm
 
 
-class MessageHomeView(generic.TemplateView):
+class MessageHomeView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'messages_home.html'
 
-class MessageInboxView(generic.ListView):
+
+class MessageInboxView(LoginRequiredMixin, generic.ListView):
     template_name = 'partials/messages_inbox.html'
     model = Message
 
@@ -20,7 +22,7 @@ class MessageInboxView(generic.ListView):
         queryset = Message.objects.filter(receiver=self.request.user.profile)
         return queryset
 
-class MessageOutboxView(generic.ListView):
+class MessageOutboxView(LoginRequiredMixin, generic.ListView):
     template_name = 'partials/messages_outbox.html'
     model = Message
 
@@ -29,7 +31,7 @@ class MessageOutboxView(generic.ListView):
         return queryset
 
 
-@login_required(login_url='login')
+
 def message_detail_inbox(request, id):
     message = request.user.profile.receiver.get(id=id)
 
@@ -37,7 +39,7 @@ def message_detail_inbox(request, id):
     context = {'message': message}
     return render(request, 'partials/user_inbox.html', context)
 
-@login_required(login_url='login')
+
 def message_detail_outbox(request, id):
     message = request.user.profile.sender.get(id=id)
 
@@ -45,7 +47,7 @@ def message_detail_outbox(request, id):
     return render(request, 'partials/user_outbox.html', context)
 
 
-@login_required(login_url='login')
+
 def send_message(request, id):
     recipient = Profile.objects.get(id=id)
     form = CustomMessageForm()
