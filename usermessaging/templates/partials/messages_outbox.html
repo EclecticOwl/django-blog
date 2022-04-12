@@ -8,7 +8,7 @@
                     <td>Body</td>
                     <td>Sent</td>
                 </tr>
-                {% for message in outbox %}
+                {% for message in object_list %}
                     <tr class='profile_message_content'>
                             <td><a href="{% url 'user-detail' message.receiver.id %}">{{message.receiver.username}}</a></td>
                             <td><a href="{% url 'message_detail_inbox' message.id %}">{{message.subject}}</a></td>

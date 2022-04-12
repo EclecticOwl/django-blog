@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views import generic
 
-
 from .models import Message
 from core.models import Profile
 
@@ -19,25 +18,16 @@ class MessageInboxView(generic.ListView):
 
     def get_queryset(self):
         queryset = Message.objects.filter(receiver=self.request.user.profile)
-
         return queryset
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(MessageInboxView, self).get_context_data(*args, **kwargs)
-        user = self.request.user.profile
-        context['inbox'] = Message.objects.filter(receiver=user)
-        return context
+class MessageOutboxView(generic.ListView):
+    template_name = 'partials/messages_outbox.html'
+    model = Message
 
+    def get_queryset(self):
+        queryset = Message.objects.filter(receiver=self.request.user.profile)
+        return queryset
 
-
-
-@login_required(login_url='login')
-def message_outbox(request):
-    user = request.user.profile
-    outbox = Message.objects.filter(sender=user)
-
-    context = {'outbox': outbox}
-    return render(request, 'partials/messages_outbox.html', context)
 
 @login_required(login_url='login')
 def message_detail_inbox(request, id):
