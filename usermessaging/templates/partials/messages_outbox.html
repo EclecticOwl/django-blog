@@ -9,10 +9,10 @@
                     <td>Sent</td>
                 </tr>
                 {% for message in outbox %}
-                    <tr class='profile_message_content' id='profile_message_content' data-href="{% url 'message_detail_outbox' message.id %}">
+                    <tr class='profile_message_content'>
                             <td><a href="{% url 'user-detail' message.receiver.id %}">{{message.receiver.username}}</a></td>
-                            <td>{{message.content}}</td>
-                            <td>{{message.created_on}}</td>
+                            <td><a href="{% url 'message_detail_inbox' message.id %}">{{message.subject}}</a></td>
+                            <td><a href="{% url 'message_detail_inbox' message.id %}">{{message.created_on}}</a></td>
                     </tr>
                 {% endfor %}
             </table>

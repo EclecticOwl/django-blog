@@ -37,14 +37,14 @@ def message_detail_inbox(request, id):
 
 
     context = {'message': message}
-    return render(request, 'user_inbox.html', context)
+    return render(request, 'partials/user_inbox.html', context)
 
 @login_required(login_url='login')
 def message_detail_outbox(request, id):
     message = request.user.profile.sender.get(id=id)
 
     context = {'message': message}
-    return render(request, 'user_outbox.html', context)
+    return render(request, 'partials/user_outbox.html', context)
 
 
 @login_required(login_url='login')
