@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.views import generic
+
 
 from .models import Message
 from core.models import Profile
@@ -8,10 +10,8 @@ from core.models import Profile
 from .forms import CustomMessageForm
 
 
-@login_required(login_url='login')
-def message_home(request):
-    context = {}
-    return render(request, 'messages_home.html', context)
+class MessageHomeView(generic.TemplateView):
+    template_name = 'messages_home.html'
 
 @login_required(login_url='login')
 def message_inbox(request):
