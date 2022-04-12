@@ -13,13 +13,23 @@ from .forms import CustomMessageForm
 class MessageHomeView(generic.TemplateView):
     template_name = 'messages_home.html'
 
-@login_required(login_url='login')
-def message_inbox(request):
-    user = request.user.profile
-    inbox = Message.objects.filter(receiver=user)
+class MessageInboxView(generic.ListView):
+    template_name = 'partials/messages_inbox.html'
+    model = Message
 
-    context = {'inbox': inbox}
-    return render(request, 'partials/messages_inbox.html', context)
+    def get_queryset(self):
+        queryset = Message.objects.filter(receiver=self.request.user.profile)
+
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(MessageInboxView, self).get_context_data(*args, **kwargs)
+        user = self.request.user.profile
+        context['inbox'] = Message.objects.filter(receiver=user)
+        return context
+
+
+
 
 @login_required(login_url='login')
 def message_outbox(request):
