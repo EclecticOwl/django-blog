@@ -320,6 +320,15 @@ nav {
     padding: 2em 0;
     font-size: 1.2em;
 }
+.profile_message tr td a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.profile_message tr td {
+    padding-left: 0;
+    padding-right: 0;
+}
 .profile_message .profile_message_content:nth-child(odd) {
     background-color: rgb(221, 219, 219);
 }
