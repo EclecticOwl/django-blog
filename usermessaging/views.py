@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 
-
 from .models import Message
 from core.models import Profile
 
@@ -39,13 +38,14 @@ class MessageInboxDetailView(LoginRequiredMixin, generic.DetailView):
         queryset = Message.objects.filter(receiver=self.request.user.profile)
         return queryset
 
-def message_detail_outbox(request, id):
-    message = request.user.profile.sender.get(id=id)
+class MessageOutboxDetailView(LoginRequiredMixin, generic.DetailView):
+    template_name = 'partials/user_outbox.html'
+    model = Message
+    context_object_name = 'message'
 
-    context = {'message': message}
-    return render(request, 'partials/user_outbox.html', context)
-
-
+    def get_queryset(self):
+        queryset = Message.objects.filter(sender=self.request.user.profile)
+        return queryset
 
 def send_message(request, id):
     recipient = Profile.objects.get(id=id)
