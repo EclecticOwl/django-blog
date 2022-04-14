@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -65,10 +65,13 @@ class SignInView(views.LoginView):
         messages.success(self.request, 'Signed In!')
         return super().form_valid(form)
 
-def signout(request):
-    logout(request)
-    messages.success(request, 'You successfully signed out.')
-    return redirect('index')
+class SignOutView(views.LogoutView):
+    redirect_authenticated_user = True
+    next_page = reverse_lazy('index')
+
+    def get_next_page(self):
+        messages.success(self.request, 'Signed Out!')
+        return super().get_next_page()
 
 @login_required(login_url='login')
 def user_profile(request):
