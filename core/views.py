@@ -81,25 +81,24 @@ class UserProfileView(generic.TemplateView):
         return context
         
 
+class EditUserProfileView(generic.UpdateView):
+    template_name = 'edit_profile.html'
+    model = Profile
+    form_class = ProfileForm
+    success_url = reverse_lazy('user-profile')
+
+    def get_queryset(self):
+        queryset = Profile.objects.filter(id=self.request.user.profile.id)
+        return queryset
     
-
-@login_required(login_url='login')
-def edit_user_profile(request):
-    profile = request.user.profile
-    form = ProfileForm(instance=profile)
-    
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-           form.save()
-           messages.success(request, "Information successfully updated!")
-           return redirect('user-profile')
-        else:
-            messages.error(request, "It appears that something went wrong with the request. Please check your entries and re-submit.")
+    def form_valid(self, form):
+        messages.success(self.request, 'Profile Updated')
+        return super().form_valid(form)
 
 
-    context = {'profile': profile, 'form': form}
-    return render(request, 'edit_profile.html', context)
+
+        
+        
 
 @login_required(login_url='login')
 def user_list(request):
