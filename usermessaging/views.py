@@ -30,15 +30,14 @@ class MessageOutboxView(LoginRequiredMixin, generic.ListView):
         queryset = Message.objects.filter(receiver=self.request.user.profile)
         return queryset
 
+class MessageInboxDetailView(LoginRequiredMixin, generic.DetailView):
+    template_name = 'partials/user_inbox.html'
+    model = Message
+    context_object_name = 'message'
 
-
-def message_detail_inbox(request, id):
-    message = request.user.profile.receiver.get(id=id)
-
-
-    context = {'message': message}
-    return render(request, 'partials/user_inbox.html', context)
-
+    def get_queryset(self):
+        queryset = Message.objects.filter(receiver=self.request.user.profile)
+        return queryset
 
 def message_detail_outbox(request, id):
     message = request.user.profile.sender.get(id=id)
