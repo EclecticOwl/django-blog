@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
-from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -73,13 +72,16 @@ class SignOutView(views.LogoutView):
         messages.success(self.request, 'Signed Out!')
         return super().get_next_page()
 
-@login_required(login_url='login')
-def user_profile(request):
-    profile = request.user.profile
+class UserProfileView(generic.TemplateView):
+    template_name = 'profile.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['profile'] = self.request.user.profile
+        return context
+        
 
-    context = {'profile': profile}
-    return render(request, 'profile.html', context)
+    
 
 @login_required(login_url='login')
 def edit_user_profile(request):
