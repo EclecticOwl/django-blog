@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 
@@ -47,6 +48,7 @@ class MessageOutboxDetailView(LoginRequiredMixin, generic.DetailView):
         queryset = Message.objects.filter(sender=self.request.user.profile)
         return queryset
 
+@login_required(login_url='login')
 def send_message(request, id):
     recipient = Profile.objects.get(id=id)
     form = CustomMessageForm()
@@ -67,3 +69,4 @@ def send_message(request, id):
 
     context = {'recipient': recipient, 'form': form}
     return render(request, 'send_message.html', context)
+

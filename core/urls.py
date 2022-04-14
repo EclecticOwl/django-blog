@@ -7,7 +7,7 @@ urlpatterns = [
     path('', views.index , name='index'),
 
     # Authentication Views
-    path('register/', views.register , name='register'),
+    path('register/', views.UserRegistrationView.as_view() , name='register'),
     path('sign-in/', views.signin, name='login'),
     path('sign-out/', views.signout, name='logout'),
     path('change-password', views.change_password, name='change-password'),

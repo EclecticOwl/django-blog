@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-
+from django.views import generic
 from .models import Profile
 from posts.models import Post
 from posts.forms import CustomPostForm
@@ -37,23 +39,22 @@ def index(request):
         context = {'profile_feed': profile_feed, 'form': form}
     return render(request, 'index.html', context)
 
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            form.save()
-            messages.success(request, 'User created successfully. Please sign in.')
-            return redirect('index')
-        else:
-            messages.error(request, 'It appears some of your information was incorrect. Please check and resubmit.')
+class UserRegistrationView(generic.FormView):
+    template_name = 'register.html'
+    form_class = UserCreationForm
+    model = get_user_model()
+    success_url = reverse_lazy('index')
 
-    else:
-        form = UserCreationForm()
+    def form_valid(self, form):
+        form.instance.username = form.instance.username.lower()
+        form.save()
+        messages.success(self.request, 'Account created. Please sign in.')
+        return super().form_valid(form)
 
-    context = {'form': form}
-    return render(request, 'register.html', context)
+    def form_invalid(self, form, request):
+        messages.error(request, 'It appears some of the information is missing. Please check your entries and try again.')
+        return super().form_invalid(form, request)
+
 
 def signin(request):
     if request.user.is_authenticated == True:
