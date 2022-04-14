@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.views import generic
+from django.contrib.auth import views
 from .models import Profile
 from posts.models import Post
 from posts.forms import CustomPostForm
@@ -55,27 +56,14 @@ class UserRegistrationView(generic.FormView):
         messages.error(request, 'It appears some of the information is missing. Please check your entries and try again.')
         return super().form_invalid(form, request)
 
-
-def signin(request):
-    if request.user.is_authenticated == True:
-        return redirect('index')
-
-    if request.method == 'POST':
-        username = request.POST['username'].lower()
-        password = request.POST['password']
-        
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, 'Successfully signed in!')
-
-            return redirect('index')
-        else:
-            messages.error(request, 'Invalid username or password. Please re-check your entries and try again.')
-
+class SignInView(views.LoginView):
+    template_name = 'sign-in.html'
+    redirect_authenticated_user = True
+    next_page = reverse_lazy('index')
     
-    context = {}
-    return render(request, 'sign-in.html', context)
+    def form_valid(self, form):
+        messages.success(self.request, 'Signed In!')
+        return super().form_valid(form)
 
 def signout(request):
     logout(request)
