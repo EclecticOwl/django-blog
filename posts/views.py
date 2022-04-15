@@ -38,12 +38,13 @@ class PostUpdateView(LoginRequiredMixin, generic.UpdateView):
         return form
 
 
+class PostDeleteView(LoginRequiredMixin, generic.DeleteView):
+    template_name = 'post_delete.html'
+    model = Post
+    success_url = reverse_lazy('my-posts')
 
-@login_required(login_url='login')
-def post_delete(request, id):
-    post = request.user.profile.posts.get(id=id)
+    def form_valid(self, form):
+        form = super().form_valid(form)
+        messages.success(self.request, 'Post Deleted!')
+        return form
 
-    if request.method == 'POST':
-        print('success')
-    context = {'post': post}
-    return render(request, 'post_delete.html', context)
