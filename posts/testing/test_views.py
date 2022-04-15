@@ -1,9 +1,12 @@
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 
 from core.models import Profile
 from posts.models import Post
+
+from posts import views
+
 
 class AllPostListTest(TestCase):
     @classmethod
@@ -202,8 +205,38 @@ class PostUpdateViewTest(TestCase):
         self.assertEqual(post.description, 'blaa')
         self.assertEqual(post.content, 'blaa')
 
+class PostDeleteViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(
+            username='bob', password='test'
+        )
+        profile = Profile.objects.get(id=1)
+        Post.objects.create(owner=profile, description='test', content='test')
     
-    
+    def test_details(self):
+        # Check url for desired url location
+        request = self.factory.get('/posts/post/delete/1/')
+        request.user = self.user
+        response = views.PostDeleteView.as_view()(request, pk=1)
+        self.assertEqual(response.status_code, 200)
+
+        request = self.factory.get(reverse('post-delete', kwargs={'pk': 1}))
+        # Login Restrict Check
+        request.user = AnonymousUser()
+        response = views.PostDeleteView.as_view()(request, pk=1)
+        self.assertEqual(response.status_code, 302)
+        # General Testing
+        request.user = self.user
+        response = views.PostDeleteView.as_view()(request, pk=1)
+        print(response)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0], 'post_delete.html')
+        
+        
+
+
+
 
     
 
