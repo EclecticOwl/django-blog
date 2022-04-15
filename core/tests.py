@@ -227,22 +227,22 @@ class EditUserProfilePageTest(TestCase):
     
     def test_view_url_exists_at_desired_location(self):
         login = self.client.login(username='bob', password='kjlekjxlKe13i')
-        response = self.client.get('/account/edit/')
+        response = self.client.get('/account/edit/1/')
         self.assertEqual(response.status_code, 200)
     
     def test_view_url_access_by_name(self):
         login = self.client.login(username='bob', password='kjlekjxlKe13i')
-        response = self.client.get(reverse('update-user-profile'))
+        response = self.client.get(reverse('update-user-profile', kwargs={'pk': 1}))
         self.assertEqual(response.status_code, 200)
     
     def test_correct_template(self):
         login = self.client.login(username='bob', password='kjlekjxlKe13i')
-        response = self.client.get(reverse('update-user-profile'))
+        response = self.client.get(reverse('update-user-profile', kwargs={'pk': 1}))
         self.assertTemplateUsed('edit_profile.html')
     
     def test_update_profile_information(self):
         login = self.client.login(username='bob', password='kjlekjxlKe13i')
-        response = self.client.post('/account/edit/', 
+        response = self.client.post('/account/edit/1/', 
             {'first_name': 'bob', 'last_name': 'smith', 'email': 'bob@example.com'})
 
         profile = Profile.objects.get(id=1)
