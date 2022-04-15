@@ -1,17 +1,19 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
 from django.views import generic
-from django.contrib.auth import views
-from .models import Profile
+from django.contrib.auth import views, get_user_model
+
 from posts.models import Post
 from posts.forms import CustomPostForm
+
 from .forms import ProfileForm
+from .models import Profile
 
 
 UserModel = get_user_model()
@@ -77,7 +79,7 @@ class SignOutView(views.LogoutView):
         messages.success(self.request, 'Signed Out!')
         return super().get_next_page()
 
-class UserProfileView(generic.TemplateView):
+class UserProfileView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'profile.html'
 
     def get_context_data(self, **kwargs):
@@ -86,7 +88,7 @@ class UserProfileView(generic.TemplateView):
         return context
         
 
-class EditUserProfileView(generic.UpdateView):
+class EditUserProfileView(LoginRequiredMixin, generic.UpdateView):
     template_name = 'edit_profile.html'
     model = Profile
     form_class = ProfileForm
@@ -116,7 +118,7 @@ def user_detail(request, pk):
     context = {'profile': profile}
     return render(request, 'user_detail.html', context)
 
-class ChangePassView(PasswordChangeView):
+class ChangePassView(LoginRequiredMixin, PasswordChangeView):
     template_name = 'change_password.html'
     success_url = reverse_lazy('index')
 

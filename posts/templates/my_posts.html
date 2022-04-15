@@ -6,7 +6,7 @@
     <h1>Post History:</h1>
 
     <div class="posts">
-        {% for post in posts %}
+        {% for post in object_list %}
             <div class="post">
                 <a href="{% url 'post-detail' post.id %}"> 
                 <h3>You posted:</h2>

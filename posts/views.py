@@ -1,29 +1,25 @@
 from django.shortcuts import render, redirect
-from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.views import generic
+
 
 from .models import Post
 from .forms import CustomPostForm
 
-@login_required(login_url='login')
-def all_post_list(request):
-    posts = Post.objects.all()
+class AllPostListView(LoginRequiredMixin, generic.ListView):
+    template_name = 'post_list.html'
+    model = Post
+    paginate_by = 4
 
-    p = Paginator(posts, 4)
-    page_number = request.GET.get('page')
-    page_obj = p.get_page(page_number)
+class MyPostListView(LoginRequiredMixin, generic.ListView):
+    template_name = 'my_posts.html'
+    model = Post
 
-    context = {'page_obj': page_obj}
-    return render(request, 'post_list.html', context)
-
-@login_required(login_url='login')
-def post_list(request):
-    user = request.user.profile
-    posts = Post.objects.filter(owner=user).order_by('-created')
-
-    context = {'posts': posts}
-    return render(request, 'my_posts.html', context)
+    def get_queryset(self):
+        return Post.objects.filter(owner=self.request.user.profile).order_by('-created')
 
 @login_required(login_url='login')
 def post_detail(request, id):
