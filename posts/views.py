@@ -21,12 +21,11 @@ class MyPostListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return Post.objects.filter(owner=self.request.user.profile).order_by('-created')
 
-@login_required(login_url='login')
-def post_detail(request, id):
-    post = Post.objects.get(id=id)
+class PostDetailView(LoginRequiredMixin, generic.DetailView):
+    template_name = 'post_detail.html'
+    model = Post
 
-    context = {'post': post}
-    return render(request, 'post_detail.html', context)
+
 
 @login_required(login_url='login')
 def post_update(request, id):
