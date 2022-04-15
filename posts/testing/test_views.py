@@ -10,7 +10,6 @@ class AllPostListTest(TestCase):
     def setUpTestData(cls):
         User.objects.create(
             username='bob',
-            password='kjlekjxlKe13i'
         )
         User.objects.create(
             username='bob2',
@@ -20,6 +19,9 @@ class AllPostListTest(TestCase):
         user = User.objects.get(id=1)
         user.set_password('kjlekjxlKe13i')
         user.save()
+
+        cls.user = 'bob'
+        cls.password = 'kjlekjxlKe13i'
 
         profile = Profile.objects.get(id=1)
         profile2 = Profile.objects.get(id=2)
@@ -39,22 +41,22 @@ class AllPostListTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_view_url_exists_at_desired_location(self):
-        self.client.login(username='bob', password='kjlekjxlKe13i')
+        self.client.login(username=self.user, password=self.password)
         response = self.client.get('/posts/')
         self.assertEqual(response.status_code, 200)
     
     def test_url_access_by_name(self):
-        self.client.login(username='bob', password='kjlekjxlKe13i')
+        self.client.login(username=self.user, password=self.password)
         response = self.client.get(reverse('all-posts'))
         self.assertEqual(response.status_code, 200)
     
     def test_correct_template(self):
-        self.client.login(username='bob', password='kjlekjxlKe13i')
+        self.client.login(username=self.user, password=self.password)
         response = self.client.get(reverse('all-posts'))
         self.assertTemplateUsed(response, 'post_list.html')
     
     def test_if_correct_num_posts_displayed(self):
-        self.client.login(username='bob', password='kjlekjxlKe13i')
+        self.client.login(username=self.user, password=self.password)
         response = self.client.get(reverse('all-posts'))
         self.assertTrue(response.context['page_obj'])
         self.assertEqual(len(response.context['page_obj']), 4)
@@ -70,6 +72,9 @@ class MyPostListViewTest(TestCase):
         user = User.objects.get(id=1)
         user.set_password('kjlekjxlKe13i')
         user.save()
+
+        cls.user = 'bob'
+        cls.password = 'kjlekjxlKe13i'
 
         num_posts = 10
 
@@ -87,22 +92,22 @@ class MyPostListViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
     
     def test_view_url_exists_at_desired_location(self):
-        self.client.login(username='bob', password='kjlekjxlKe13i')
+        self.client.login(username=self.user, password=self.password)
         response = self.client.get('/posts/my-posts/')
         self.assertEqual(response.status_code, 200)
     
     def test_url_access_by_name(self):
-        self.client.login(username='bob', password='kjlekjxlKe13i')
+        self.client.login(username=self.user, password=self.password)
         response = self.client.get(reverse('my-posts'))
         self.assertEqual(response.status_code, 200)
     
     def test_correct_template(self):
-        self.client.login(username='bob', password='kjlekjxlKe13i')
+        self.client.login(username=self.user, password=self.password)
         response = self.client.get(reverse('my-posts'))
         self.assertTemplateUsed(response, 'my_posts.html')
     
     def test_if_correct_num_posts_displayed(self):
-        self.client.login(username='bob', password='kjlekjxlKe13i')
+        self.client.login(username=self.user, password=self.password)
         response = self.client.get(reverse('my-posts'))
         self.assertTrue(response.context['object_list'])
         self.assertEqual(len(response.context['object_list']), 10)
@@ -118,6 +123,9 @@ class PostUpdateViewTest(TestCase):
         user.set_password('kjlekjxlKe13i')
         user.save()
 
+        cls.user = 'bob'
+        cls.password = 'kjlekjxlKe13i'
+
         profile = Profile.objects.get(id=1)
 
         Post.objects.create(
@@ -131,17 +139,17 @@ class PostUpdateViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
     
     def test_view_url_exists_at_desired_location(self):
-        self.client.login(username='bob', password='kjlekjxlKe13i')
+        self.client.login(username=self.user, password=self.password)
         response = self.client.get('/posts/post/1/')
         self.assertEqual(response.status_code, 200)
 
     def test_correct_template(self):
-        self.client.login(username='bob', password='kjlekjxlKe13i')
+        self.client.login(username=self.user, password=self.password)
         response = self.client.get(reverse('post-detail', kwargs={'pk': 1}))
         self.assertTemplateUsed(response, 'post_detail.html')
     
     def test_url_access_by_name(self):
-        self.client.login(username='bob', password='kjlekjxlKe13i')
+        self.client.login(username=self.user, password=self.password)
         response = self.client.get(reverse('post-detail', kwargs={'pk': 1}))
         self.assertEqual(response.status_code, 200)
 
