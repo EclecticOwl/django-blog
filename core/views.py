@@ -2,15 +2,20 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordChangeView
 from django.views import generic
 from django.contrib.auth import views
 from .models import Profile
 from posts.models import Post
 from posts.forms import CustomPostForm
-
 from .forms import ProfileForm
+
+
+UserModel = get_user_model()
+
 
 def index(request):
     if request.user.is_anonymous:
@@ -92,21 +97,12 @@ class EditUserProfileView(generic.UpdateView):
         return queryset
     
     def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.user.profile = self.request.user.profile
+        form.save()
         messages.success(self.request, 'Profile Updated')
         return super().form_valid(form)
-
-
-
-        
-        
-
-@login_required(login_url='login')
-def user_list(request):
-    profiles = Profile.objects.all()
-
-    context = {'profiles': profiles}
-    return render(request, 'users.html', context)
-
+    
 @login_required(login_url='login')
 def user_detail(request, pk):
     profile = Profile.objects.get(id=pk)
@@ -120,21 +116,11 @@ def user_detail(request, pk):
     context = {'profile': profile}
     return render(request, 'user_detail.html', context)
 
-@login_required(login_url='login')
-def change_password(request):
-    user = request.user
+class ChangePassView(PasswordChangeView):
+    template_name = 'change_password.html'
+    success_url = reverse_lazy('index')
 
-    if request.method == 'POST':
-        form = PasswordChangeForm(user=user, data=request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Password changed successfully. Please re-sign in.')
-            return redirect('index')
-        else:
-            messages.error(request, 'It appears one of the fields was incorrect. Please check your entries and try again.')
-
-    else:
-        form = PasswordChangeForm(user)
-
-    context = {'form': form}
-    return render(request, 'change_password.html', context)
+    def form_valid(self, form):
+        form = super().form_valid(form)
+        messages.success(self.request, 'Password has been updated.')
+        return form
