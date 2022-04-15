@@ -108,6 +108,37 @@ class MyPostListViewTest(TestCase):
         self.assertEqual(len(response.context['object_list']), 10)
 
 
+class PostUpdateViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        User.objects.create(
+            username='bob',
+        )
+        user = User.objects.get(id=1)
+        user.set_password('kjlekjxlKe13i')
+        user.save()
+
+        profile = Profile.objects.get(id=1)
+
+        Post.objects.create(
+            owner=profile,
+            description='blaa',
+            content='blaa',
+        )
+    
+    def test_if_redirect_if_anon(self):
+        response = self.client.get('/posts/post/1/')
+        self.assertEqual(response.status_code, 302)
+    
+    def test_view_url_exists_at_desired_location(self):
+        self.client.login(username='bob', password='kjlekjxlKe13i')
+        response = self.client.get('/posts/post/1/')
+        self.assertEqual(response.status_code, 200)
+    
+    def test_url_access_by_name(self):
+        self.client.login(username='bob', password='kjlekjxlKe13i')
+        response = self.client.get(reverse('post-detail', kwargs={'pk': 1}))
+        self.assertEqual(response.status_code, 200)
 
     
 
