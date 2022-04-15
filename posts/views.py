@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -25,23 +26,18 @@ class PostDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'post_detail.html'
     model = Post
 
+class PostUpdateView(LoginRequiredMixin, generic.UpdateView):
+    template_name = 'post_update.html'
+    model = Post
+    form_class = CustomPostForm
+    success_url = reverse_lazy('my-posts')
+
+    def form_valid(self, form):
+        form = super().form_valid(form)
+        messages.success(self.request, 'Post Updated!')
+        return form
 
 
-@login_required(login_url='login')
-def post_update(request, id):
-    post = request.user.profile.posts.get(id=id)
-
-    if request.method == 'POST':
-        form = CustomPostForm(request.POST, instance=post)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Post updated successfully.')
-            return redirect('my-posts')
-    else:
-        form = CustomPostForm(instance=post)
-
-    context = {'post': post, 'form': form}
-    return render(request, 'post_update.html', context)
 
 @login_required(login_url='login')
 def post_delete(request, id):
