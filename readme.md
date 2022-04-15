@@ -11,4 +11,4 @@
 ## To Do:
 
 #### Changeable Theme Preferences For Profiles
-#### Convert FBVs into CBVs
+#### Update CSS Styling further/ Possibly use css preprocessor
