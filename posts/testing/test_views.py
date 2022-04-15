@@ -157,53 +157,33 @@ class PostUpdateViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
 class PostUpdateViewTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        User.objects.create(
-            username='bob',
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(
+            username='bob', password='test'
         )
-        user = User.objects.get(id=1)
-        user.set_password('kjlekjxlKe13i')
-        user.save()
-        cls.user = 'bob'
-        cls.password = 'kjlekjxlKe13i'
-
         profile = Profile.objects.get(id=1)
+        Post.objects.create(owner=profile, description='test', content='test')
 
-        Post.objects.create(
-            owner=profile,
-            description='blaa',
-            content='blaa',
-        )
-    
-    def test_if_redirect_if_anon(self):
-        response = self.client.get('/posts/post/update/1/')
-        self.assertEqual(response.status_code, 302)
-    
-    def test_view_url_exists_at_desired_location(self):
-        self.client.login(username=self.user, password=self.password)
-        response = self.client.get('/posts/post/update/1/')
+    def test_details(self):
+        # Check url for desired location
+        request = self.factory.get('/posts/post/update/1/')
+        request.user = self.user
+        response = views.PostUpdateView.as_view()(request, pk=1)
         self.assertEqual(response.status_code, 200)
-
-    def test_url_access_by_name(self):
-        self.client.login(username=self.user, password=self.password)
-        response = self.client.get(reverse('post-update', kwargs={'pk': 1}))
-        self.assertEqual(response.status_code, 200)
-    
-    def test_correct_template(self):
-        self.client.login(username=self.user, password=self.password)
-        response = self.client.get(reverse('post-update', kwargs={'pk': 1}))
-        self.assertTemplateUsed(response, 'post_update.html')
-    
-    def test_update_post(self):
-        self.client.login(username=self.user, password=self.password)
-        response = self.client.post('posts/post/update/1/',
-            {'description': 'blaa', 'content': 'blaa'})
         
-        post = Post.objects.get(id=1)
+        request = self.factory.get(reverse('post-update', kwargs={'pk': 1}))
+        # Login Restrict Check
+        request.user = AnonymousUser()
+        response = views.PostUpdateView.as_view()(request, pk=1)
+        self.assertEqual(response.status_code, 302)
+        # General Testing
+        request.user = self.user
+        response = views.PostUpdateView.as_view()(request, pk=1)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0], 'post_update.html')
 
-        self.assertEqual(post.description, 'blaa')
-        self.assertEqual(post.content, 'blaa')
+
 
 class PostDeleteViewTest(TestCase):
     def setUp(self):
