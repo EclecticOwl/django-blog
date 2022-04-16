@@ -13,7 +13,7 @@
 </head>
 <body>
     {% include 'partials/navbar.html' %}
-
+    <div class="base-container">
     {% if messages %}
     <ul class="messages" id="messages">
     {% for message in messages %}
@@ -25,13 +25,11 @@
     </ul>
     {% endif %}
 
-    <div class="container flex-center">
 
         {% block content %}
         {% endblock content %}
 
     </div>
-
     <script src="{% static 'js/main.js' %}"></script>
     <script src="https://unpkg.com/htmx.org@1.1.0"></script>
     <script>
