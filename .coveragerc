@@ -1,0 +1,8 @@
+[run]
+omit =
+        *__init__*
+        */usr/local/lib*
+        *Test*
+        */venv/*
+        */migrations/*
+        */config/*
