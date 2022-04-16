@@ -1,68 +1,45 @@
 from django.test import TestCase, RequestFactory
 from django.urls import reverse
 from django.contrib.auth.models import User, AnonymousUser
-
+from django.contrib.messages import get_messages
 from core.models import Profile
 from posts.models import Post
-
 from posts import views
 
-
-class AllPostListTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        User.objects.create(
-            username='bob',
-        )
-        User.objects.create(
-            username='bob2',
-            password='kjlekjxlJJJJJ'
-        )
-
-        user = User.objects.get(id=1)
-        user.set_password('kjlekjxlKe13i')
-        user.save()
-
-        cls.user = 'bob'
-        cls.password = 'kjlekjxlKe13i'
-
+class AllPostListViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(username='bob', password='test')
         profile = Profile.objects.get(id=1)
-        profile2 = Profile.objects.get(id=2)
-
-        profile.following.add(profile2)
-
         num_posts = 10
-
         for i in range(num_posts):
             Post.objects.create(
-                owner=profile2,
+                owner=profile,
                 description=f'{i}',
                 content=f'{i}',
             )
-    def test_if_redirect_if_anon(self):
-        response = self.client.get('/posts/')
-        self.assertEqual(response.status_code, 302)
+    
+    def test_details(self):
+        # Check url for desired location
+        request = self.factory.get('/posts/')
+        request.user = self.user
+        response = views.AllPostListView.as_view()(request)
+        self.assertEqual(response.status_code, 200)
 
-    def test_view_url_exists_at_desired_location(self):
-        self.client.login(username=self.user, password=self.password)
-        response = self.client.get('/posts/')
+        request = self.factory.get(reverse('all-posts'))
+
+        # Login Restrict Check
+        request.user = AnonymousUser()
+        response = views.AllPostListView.as_view()(request)
+        self.assertEqual(response.status_code, 302)
+        # General Testing
+        request.user = self.user
+        response = views.AllPostListView.as_view()(request)
         self.assertEqual(response.status_code, 200)
-    
-    def test_url_access_by_name(self):
-        self.client.login(username=self.user, password=self.password)
-        response = self.client.get(reverse('all-posts'))
-        self.assertEqual(response.status_code, 200)
-    
-    def test_correct_template(self):
-        self.client.login(username=self.user, password=self.password)
-        response = self.client.get(reverse('all-posts'))
-        self.assertTemplateUsed(response, 'post_list.html')
-    
-    def test_if_correct_num_posts_displayed(self):
-        self.client.login(username=self.user, password=self.password)
-        response = self.client.get(reverse('all-posts'))
-        self.assertTrue(response.context['page_obj'])
-        self.assertEqual(len(response.context['page_obj']), 4)
+        self.assertEqual(response.template_name[0], 'post_list.html')
+        # Test pagination and context obj
+        self.assertTrue(response.context_data['page_obj'])
+        self.assertEqual(len(response.context_data['page_obj']), 4)
 
 class MyPostListViewTest(TestCase):
     def setUp(self):
@@ -71,7 +48,6 @@ class MyPostListViewTest(TestCase):
             username='bob', password='test'
         )
         profile = Profile.objects.get(id=1)
-
         num_posts = 10
 
         for i in range(num_posts):
@@ -97,9 +73,9 @@ class MyPostListViewTest(TestCase):
         response = views.MyPostListView.as_view()(request)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.template_name[0], 'my_posts.html')
-
-        
-
+        # Test pagination and context obj
+        self.assertTrue(response.context_data['object_list'])
+        self.assertEqual(len(response.context_data['object_list']), 10)
 
 class PostUpdateViewTest(TestCase):
     def setUp(self):
@@ -127,8 +103,15 @@ class PostUpdateViewTest(TestCase):
         response = views.PostUpdateView.as_view()(request, pk=1)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.template_name[0], 'post_update.html')
+        # Test Post
+        self.client.login(username='bob', password='test')
+        response = self.client.post('/posts/post/update/1/',
+            {'description': 'blaa', 'content': 'blaa'})
+        
+        post = Post.objects.get(id=1)
 
-
+        self.assertEqual(post.description, 'blaa')
+        self.assertEqual(post.content, 'blaa')
 
 class PostDeleteViewTest(TestCase):
     def setUp(self):
@@ -154,9 +137,17 @@ class PostDeleteViewTest(TestCase):
         # General Testing
         request.user = self.user
         response = views.PostDeleteView.as_view()(request, pk=1)
-        print(response)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.template_name[0], 'post_delete.html')
+        # Test delete post
+        self.client.login(username='bob', password='test')
+        request = self.client.post('/posts/post/delete/1/')
+        message = []
+        for item in get_messages(request.wsgi_request):
+            message.append(str(item))
+        self.assertIn('Post Deleted!', message)
+
+
         
         
 
