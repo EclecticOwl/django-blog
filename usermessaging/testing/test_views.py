@@ -106,7 +106,7 @@ class MessageInboxDetailViewTest(TestCase):
         self.user2 = User.objects.create_user(username='bob2', password='test')
         profile = Profile.objects.get(id=1)
         profile2 = Profile.objects.get(id=2)
-        
+
         Message.objects.create(
             sender=profile2,
             receiver=profile,
@@ -134,5 +134,41 @@ class MessageInboxDetailViewTest(TestCase):
         ### Test context data and length
         self.assertIn('message', response.context_data)
         self.assertEqual(str(response.context_data['message']), 'From bob2 to bob')
+
+class MessageOutboxDetailViewTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(username='bob', password='test')
+        self.user2 = User.objects.create_user(username='bob2', password='test')
+        profile = Profile.objects.get(id=1)
+        profile2 = Profile.objects.get(id=2)
+
+        Message.objects.create(
+            sender=profile,
+            receiver=profile2,
+            subject='ii',
+            content='iiii',
+            is_read=False,
+        )
+        
+    def test_details(self):
+        ### Check url for desired location
+        request = self.factory.get('/messages/outbox/1/')
+        request.user = self.user
+        response = views.MessageOutboxDetailView.as_view()(request, pk=1)
+        self.assertEqual(response.status_code, 200)
+        ### Login Restrict Check
+        request = self.factory.get(reverse('message_detail_outbox', kwargs={'pk': 1}))
+        request.user = AS()
+        response = views.MessageOutboxDetailView.as_view()(request, pk=1)
+        self.assertEqual(response.status_code, 302)
+        ### General Testing
+        request.user = self.user
+        response = views.MessageOutboxDetailView.as_view()(request, pk=1)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.template_name[0], 'partials/user_outbox.html')
+        ### Test context data and length
+        self.assertIn('message', response.context_data)
+        self.assertEqual(str(response.context_data['message']), 'From bob to bob2')
         
         
