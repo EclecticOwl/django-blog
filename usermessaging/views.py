@@ -27,7 +27,7 @@ class MessageOutboxView(LoginRequiredMixin, generic.ListView):
     model = Message
 
     def get_queryset(self):
-        queryset = Message.objects.filter(receiver=self.request.user.profile)
+        queryset = Message.objects.filter(sender=self.request.user.profile)
         return queryset
 
 class MessageInboxDetailView(LoginRequiredMixin, generic.DetailView):
