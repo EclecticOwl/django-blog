@@ -171,4 +171,36 @@ class MessageOutboxDetailViewTest(TestCase):
         self.assertIn('message', response.context_data)
         self.assertEqual(str(response.context_data['message']), 'From bob to bob2')
         
-        
+class SendMessageView(TestCase):
+    @classmethod
+    def setUp(self):
+        self.user = User.objects.create_user(username='bob', password='test')
+        self.user2 = User.objects.create_user(username='bob2', password='test')
+    
+    def test_details(self):
+        ### Check url for desired location
+        self.client.login(username='bob', password='test')
+        response = self.client.get('/messages/new_message/2/')
+        self.assertEqual(response.status_code, 200)
+        self.client.logout()
+        ### Login Restrict Check
+        response = self.client.get('/messages/new_message/2/')
+        self.assertEqual(response.status_code, 302)
+        ### General Testing
+        self.client.login(username='bob', password='test')
+        response = self.client.get(reverse('send_message', kwargs={'id': 2}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'send_message.html')
+        self.assertTrue(response.context['recipient'])
+        self.assertTrue(response.context['form'])
+
+        self.client.login(username='bob', password='test')
+        self.client.post('/messages/new_message/2/', 
+            {'subject': 'hello', 'content': 'hello bob'})
+
+        message = Message.objects.get(id=1)
+        self.assertEqual(message.subject, 'hello')
+        self.assertEqual(message.content, 'hello bob')
+        self.assertIsInstance(message, Message)
+
+
