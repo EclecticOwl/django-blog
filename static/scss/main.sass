@@ -1,0 +1,48 @@
+$base: rgba(0, 0, 0, 0.608)
+$secondary: rgba(0, 0, 0, 0.608)
+$text-color: white
+$boxshadow: 0 .25em 1em grey
+
+
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+
+body 
+    color: $text-color
+    background-color: $secondary
+    font-family: 'Poppins', sans-serif
+    line-height: 2em
+
+// Utility Class
+.flex-center
+    display: flex
+    justify-content: center
+    align-items: center
+
+// Navbar
+nav
+    background-color: $base
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 1em 1.5em
+    font-size: 1.2em
+    box-shadow: $boxshadow
+
+    .nav-links
+        display: flex
+        list-style-type: none
+        gap: 1em
+    
+    .nav-links a
+        color: $text-color
+        text-decoration: none
+        padding: .25em
+        &:hover
+            text-decoration: underline
+
+// Base Layer
+.container 
+    padding: 1em
