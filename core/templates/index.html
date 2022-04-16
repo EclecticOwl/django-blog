@@ -4,28 +4,34 @@
 {% block content %}
 
 {% if not request.user.is_anonymous %}
-<div class="index-container">
-    <div class="form-container new_post_container">
-        <h1>New Post</h1>
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form }}
-            <button type="submit">Create New Post</button>
-        </form>
+<div class="layout-container">
+    <div class='form-container'>
+        <div class="flex-center">
+            <h1>New Post</h1>
+            <form action="" method="post" class='new-post'>
+                {% csrf_token %}
+                <div>
+                {{ form }}
+                </div>
+                <div>
+                <button type="submit">Create New Post</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="feed_container">
-        <h2>Recent posts from followed people:</h2>
+    <div class="feed flex-center">
+        <h2>Recent followed posts:</h2>
         {% for obj in profile_feed %}
     
-        <div class="post">
+        <div class="post flex-center">
             <h3>
                 <a href="{% url 'user-detail' obj.owner.id %}">{{obj.owner}}</a>
                 posted:
             </h3>
             <div class="post-description">
-                Subject: {{obj.description}}
+                {{obj.description}}
             </div>
-            <div class="post_body">
+            <div class="post-body">
                 <p>"{{obj.content}}"</p>
                 <span> on: {{obj.created}}</span>
             </div>

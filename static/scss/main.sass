@@ -1,8 +1,9 @@
 $base: rgba(0, 0, 0, 0.608)
-$secondary: rgba(0, 0, 0, 0.608)
-$teritary: rgba(0, 0, 0, 1)
+$secondary: grey
+$teritary: rgba(0, 0, 0, .900)
 $text-color: white
-$boxshadow: 0 .25em 1em grey
+$boxshadow: 0 .25em 1em $base
+$boxshadow2: 0 .2em .2em $base
 
 
 *
@@ -15,17 +16,18 @@ body
     background-color: $secondary
     font-family: 'Poppins', sans-serif
     line-height: 2em
+    font-size: 1.2em
 
-// Utility Class
+// Utility Classes
 .flex-center
     display: flex
+    flex-direction: column
     justify-content: center
     align-items: center
 
 .container 
     width: 100%
     display: flex
-    justify-content: space-between
     padding: 1em
 
 // Navbar
@@ -131,14 +133,6 @@ header
 		display: none
 	
 // Base Layer
-.base-container 
-    margin-top: 4em
-    position: relative
-    display: flex
-    justify-content: center
-    align-items: center
-    height: calc(100vh - 4em)
-
 .messages
     position: absolute
     bottom: 0
@@ -156,3 +150,83 @@ header
     
     li:hover
         cursor: pointer
+
+// Index
+.layout-container
+    margin-top: 100px
+    padding: 0 .5em
+
+    .form-container
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        gap: 1.5em
+
+        .flex-center
+            background-color: $base
+            padding: 1em
+            border-radius: 1em
+            box-shadow: $boxshadow
+            gap: 1em
+        
+
+        .new-post
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            gap: 1em
+        
+
+            input
+                height: 2em
+                padding: 1em
+                border-radius: 1em
+                outline: none
+                width: 200px
+                box-shadow: $boxshadow2
+
+            button
+                padding: 0.5em 1em
+                width: 150px
+                border-radius: 2em
+                margin-top: 1em
+                box-shadow: $boxshadow2
+                border: none
+        
+    @media (max-width: 700px) 
+        .new-post div
+            display: flex
+            flex-direction: column
+            padding: 0 2em
+            
+
+    
+    .feed
+        margin-top: 1em
+        display: flex
+        gap: 1em
+
+    .post
+        background-color: $base
+        width: 350px
+        border-radius: 1em
+        box-shadow: $boxshadow2
+
+        .post-body
+            background-color: $secondary
+            border-radius: 1em
+            padding: .25em 1em
+            margin-bottom: 0.5em
+            width: 300px
+        
+        span
+            font-size: .5em
+        
+        a
+            color: white
+            text-decoration: none
+
+
+
