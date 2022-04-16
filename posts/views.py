@@ -15,7 +15,7 @@ class MyPostListView(LoginRequiredMixin, generic.ListView):
     model = Post
 
     def get_queryset(self):
-        return Post.objects.filter(owner=self.request.user.profile).order_by('-created')
+        return Post.objects.filter(owner=self.request.user.profile)
 
 class PostDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'post_detail.html'
