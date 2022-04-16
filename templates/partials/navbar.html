@@ -1,20 +1,38 @@
-<nav>
-    <div class="logo">
-        <span>Django Blog</span>
+<header>
+    <div class="container nav">
+        <div class="logo">
+            <span>Django Blog</span>
+        </div>
+        <nav class='main-links'>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'user-profile' %}">My Account</a></li>
+                <li><a href="{% url 'messages_home' %}">My Messages</a></li>
+                <li><a href="{% url 'my-posts' %}">My Posts</a></li>
+                <li><a href="{% url 'all-posts' %}">All Posts</a></li>
+                <li><a href="{% url 'logout' %}">Sign Out</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Sign In</a></li>
+                <li><a href="{% url 'register' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <button class="hamburger" id='hamburger'>
+            <div class="bar"></div>
+        </button>
     </div>
-    <div class="main-links">
-        <ul class="nav-links">
-            <li><a href="{% url 'index' %}">Home</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'user-profile' %}">My Account</a></li>
-            <li><a href="{% url 'messages_home' %}">My Messages</a></li>
-            <li><a href="{% url 'my-posts' %}">My Posts</a></li>
-            <li><a href="{% url 'all-posts' %}">All Posts</a></li>
-            <li><a href="{% url 'logout' %}">Sign Out</a></li>
-            {% else %}
-            <li><a href="{% url 'login' %}">Sign In</a></li>
-            <li><a href="{% url 'register' %}">Sign Up</a></li>
-            {% endif %}
-        </ul>
-    </div>
+</header>
+<nav class="mobile-nav" id='mobile-nav'>
+    <a href="{% url 'index' %}">Home</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'user-profile' %}">My Account</a>
+    <a href="{% url 'messages_home' %}">My Messages</a>
+    <a href="{% url 'my-posts' %}">My Posts</a>
+    <a href="{% url 'all-posts' %}">All Posts</a>
+    <a href="{% url 'logout' %}">Sign Out</a>
+    {% else %}
+    <a href="{% url 'login' %}">Sign In</a>
+    <a href="{% url 'register' %}">Sign Up</a>
+    {% endif %}
 </nav>
