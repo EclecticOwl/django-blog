@@ -2,13 +2,20 @@
 
 {% block content %}
 
-<div class="form-container">
-    <h1>Edit Post</h1>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Edit Post</button>
-    </form>
+<div class="layout-container">
+    <div class="background-container">
+        <div class="form-container">
+            <form action="" method="post" class="form-layout">
+                <h1>Edit Post</h1>
+                {% csrf_token %}
+                {{ form }}
+                <div class="form-controls">
+                    <a class="go-back" href="{% url 'my-posts' %}">Go Back</a>
+                    <button type="submit">Edit Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
