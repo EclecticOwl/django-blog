@@ -2,19 +2,22 @@
 
 
 {% block content %}
+<div class="layout-container">
+    <div class="form-container">
+        <div class="background-container">
+            <form action="" method="post" class="form-layout">
+                <h1>Update Information</h1>
+                {% csrf_token %}
+            
+                {{ form }}
 
-<div class="form-container">
-    <h1>Update Information</h1>
-    <form action="" method="post">
-        {% csrf_token %}
-    
-        {{ form }}
-
-        <div class="form-controls">
-            <a class="go-back" href="{% url 'user-profile' %}">Go Back</a>
-            <button type="submit">Update</button>
+                <div class="form-controls">
+                    <a class="go-back" href="{% url 'user-profile' %}">Go Back</a>
+                    <button type="submit">Update</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 
 {% endblock content %}
