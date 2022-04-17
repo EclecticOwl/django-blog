@@ -2,12 +2,16 @@
 
 {% block content %}
 
-<div class="messages_home">
-    <div class="messages_control">
-        <button hx-get="{% url 'message_inbox' %}" hx-target="#messages_display">Inbox</button>
-        <button hx-get="{% url 'message_outbox' %}" hx-target="#messages_display">Outbox</button>
-    </div>
-    <div class="messages_display" id="messages_display">
+<div class="layout-container">
+    <div class="messages-container">
+        <div class="background-container">
+            <div class="messages-control">
+                <button hx-get="{% url 'message_inbox' %}" hx-target="#messages_display">Inbox</button>
+                <button hx-get="{% url 'message_outbox' %}" hx-target="#messages_display">Outbox</button>
+            </div>
+            <div class="messages-display" id="messages_display">
+            </div>
+        </div>
     </div>
 </div>
 
