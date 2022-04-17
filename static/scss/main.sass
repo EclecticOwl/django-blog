@@ -35,6 +35,47 @@ body
     width: 100%
     display: flex
     padding: 1em
+.form-layout
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    overflow-wrap: break-word
+    input
+        height: 2em
+        padding: 1em
+        border: none
+        outline: none
+        border-radius: 1em
+        width: 300px
+        box-shadow: $boxshadow2
+        background-color: $secondary
+    
+    .form-controls
+        margin-top: 1em
+
+        .go-back, button
+            text-align: center
+            font-size: 1em
+            padding: .5em 1em
+            color: $text-color
+            border-radius: 2em
+            box-shadow: $boxshadow2
+            width: 200px
+        
+        .go-back
+            background-color: firebrick
+            text-decoration: none
+
+        button
+            background-color: limegreen
+    @media (max-width: 700px)
+        .form-controls
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            gap: 1em
 
 // Navbar
 header 
@@ -160,6 +201,8 @@ header
 // Index
 .layout-container
     margin-top: 100px
+    margin-left: 1em
+    margin-right: 1em
     padding: 0 .5em
 
     .form-container
@@ -267,3 +310,10 @@ header
             flex-direction: column
 
 
+.background-container
+    background-color: $base
+    padding: 2em
+    border-radius: 1em
+    box-shadow: $boxshadow
+    
+    
