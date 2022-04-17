@@ -12,7 +12,7 @@ from django.contrib.auth import views, get_user_model
 from posts.models import Post
 from posts.forms import CustomPostForm
 
-from .forms import ProfileForm
+from .forms import ProfileForm, ThemeForm
 from .models import Profile
 
 
@@ -126,3 +126,14 @@ class ChangePassView(LoginRequiredMixin, PasswordChangeView):
         form = super().form_valid(form)
         messages.success(self.request, 'Password has been updated.')
         return form
+
+
+def UpdateTheme(request):
+    theme = request.user.profile.theme
+    form = ThemeForm(instance=theme)
+
+    if request.method == 'POST':
+        pass
+
+    context = {'form': form, 'theme': theme}
+    return render(request, 'change_theme.html', context)

@@ -25,6 +25,7 @@
             </div>
             {% endif %}
             <div class="flex-center-row">
+                <a class="account-theme" href="{% url 'update-theme' %}">Update Theme</a>
                 <a class="account-update" href="{% url 'update-user-profile' profile.id %}">Update Info</a>
                 <a class="account-password" href="{% url 'change-password' %}">Change Password</a>
             </div>
