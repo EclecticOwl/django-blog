@@ -12,7 +12,7 @@
                 {{ form }}
 
                 <div class="form-controls">
-                    <a href="" class="go-back">Go Back</a>
+                    <a href="{{request.META.HTTP_REFERER}}" class="go-back">Go Back</a>
                     <button type="submit">Send Message</button>
                 </div>
             </form>
