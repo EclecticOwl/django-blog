@@ -11,7 +11,7 @@
                     <tr class='profile-message-content'>
                             <td><a href="{% url 'user-detail' message.receiver.id %}">{{message.receiver.username}}</a></td>
                             <td><a href="{% url 'message_detail_outbox' message.id %}">{{message.subject}}</a></td>
-                            <td class="mail-date"><a href="{% url 'message_detail_outbox' message.id %}">{{message.created_on|date:'H:i Y-m-d'}}</a></td>
+                            <td class="mail-date"><a href="{% url 'message_detail_outbox' message.id %}">{{message.created_on|date:'H:i m-d-Y'}}</a></td>
                     </tr>
                 {% endfor %}
             </table>

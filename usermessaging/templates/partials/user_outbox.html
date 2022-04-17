@@ -3,18 +3,21 @@
 
 {% block content %}
 
-    <div class="messages_container">
-        <div class="message_detail">
-            <div>
-                <h3>Message to:</h3>
-                <p>{{ message.sender.username }}</p>
-                <p>{{ message.created_on }}</p>
-            </div>
-            <div>
-                <h3>Subject: {{ message.subject }}</h3>
-                <p>{{ message.content }}</p>
+<div class="layout-container">
+    <div class="messages-container">
+        <div class="message-layout">
+            <div class="background-container">
+                <div class="message-header flex-center">
+                    <h3>Message to: <span>{{message.receiver.username}}</span></h3>
+                    <p>sent: {{ message.created_on|date:'H:i m-d-Y' }}</p>
+                </div>
+                <div class="message-content">
+                    <h4>Subject: {{ message.subject }}</h4>
+                    <p>"{{ message.content }}"</p>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}

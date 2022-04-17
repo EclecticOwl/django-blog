@@ -9,7 +9,7 @@
             <div class="background-container">
                 <div class="message-header flex-center">
                     <h3>Message from: <span>{{message.sender.username}}</span></h3>
-                    <p> sent: {{ message.created_on|date:'H:i Y-m-d' }}</p>
+                    <p> sent: {{ message.created_on|date:'H:i m-d-Y' }}</p>
                 </div>
                 <div class="message-content">
                     <h4>Title: {{message.subject }}</h4>
