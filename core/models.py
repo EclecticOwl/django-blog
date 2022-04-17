@@ -12,10 +12,24 @@ class Profile(models.Model):
     email = models.EmailField(max_length=300, blank=True, null=True)
     username = models.CharField(max_length=200, blank=True, null=True)
 
-    following = models.ManyToManyField('self', symmetrical=False, related_name='followers', blank=True, null=True)
+    following = models.ManyToManyField('self', symmetrical=False, related_name='followers', blank=True)
 
     def __str__(self):
         return self.username
+
+
+THEME_CHOICES = [
+    ('dm', 'main'),
+    ('lm', 'light')
+]
+
+class Theme(models.Model):
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name='theme')
+    theme_choice = models.CharField(choices=THEME_CHOICES, max_length=100, default='main')
+
+
+    def __str__(self):
+        return self.theme_choice
 
 
 # The following is for signals to connect the user model and the profile model
