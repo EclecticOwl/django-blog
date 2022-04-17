@@ -399,6 +399,17 @@ header
     justify-content: center
     align-items: center
 
+
+    .message-layout
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 700px
+
+        
+        .background-container
+            width: 100%
+        
     .messages-control
         display: flex
         justify-content: center
@@ -417,6 +428,30 @@ header
     
     .messages-display
         margin-top: 1em
+    
+    .message-header
+        display: flex
+        flex-direction: column
+        
+        p
+            font-size: .75em
+    
+    .message-content
+        background-color: $secondary
+        padding: 1em
+        border-radius: 1em
+        box-shadow: $boxshadow2
+
+        p
+            margin-top: 2em
+
+    @media (max-width: 750px)
+        .message-layout
+            width: 90%
+    @media (max-width: 400px)
+        .message-layout
+            width: 100%
+
 
 
 .mail-container
