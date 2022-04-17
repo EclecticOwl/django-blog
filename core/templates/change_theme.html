@@ -5,14 +5,16 @@
 
 <div class="layout-container">
     <div class="form-container">
-        <form action="">
-            {% csrf_token %}
-            {{ form }}
-            <div class="form-controls">
-                <a class="go-back" href="{{request.META.HTTP_REFERER}}">Go Back</a>
-                <button type="submit">Update Theme</button>
-            </div>
-        </form>
+        <div class="background-container">
+            <form action="" method="post" class="form-layout">
+                {% csrf_token %}
+                {{ form }}
+                <div class="form-controls">
+                    <a class="go-back" href="{{request.META.HTTP_REFERER}}">Go Back</a>
+                    <button type="submit">Update Theme</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

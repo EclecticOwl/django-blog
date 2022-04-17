@@ -133,7 +133,12 @@ def UpdateTheme(request):
     form = ThemeForm(instance=theme)
 
     if request.method == 'POST':
-        pass
+        form = ThemeForm(instance=theme, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Theme Updated')
+
+
 
     context = {'form': form, 'theme': theme}
     return render(request, 'change_theme.html', context)
