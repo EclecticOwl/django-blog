@@ -25,6 +25,12 @@ body
     justify-content: center
     align-items: center
 
+.flex-center-row
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+
 .container 
     width: 100%
     display: flex
@@ -201,8 +207,6 @@ header
             flex-direction: column
             padding: 0 2em
             
-
-    
     .feed
         margin-top: 1em
         display: flex
@@ -227,6 +231,39 @@ header
         a
             color: white
             text-decoration: none
+// Profile
+.account-container
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    gap: 1em
 
+    .account-info
+        width: minmax(360px, 800px)
+        padding: 2em
+        background-color: $base
+        border-radius: 1em
+        box-shadow: $boxshadow
+    a
+        color: $text-color
+        text-decoration: none
+        padding: .1em .5em
+        border-radius: 1em
+        box-shadow: $boxshadow2
+        margin-top: 1em
+    
+    .account-update
+        background-color: green
+    .account-password
+        background-color: blue
+    .flex-center-row
+        gap: 1em
+    @media (max-width: 700px)
+        a
+            width: 200px
+            text-align: center
+        .flex-center-row
+            flex-direction: column
 
 

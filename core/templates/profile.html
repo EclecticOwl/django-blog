@@ -2,30 +2,32 @@
 
 {% block content %}
 
-<div class="account_container">
-    <div class="account_info">
-        <h1>Account Information</h1>
-        <div class="account_username">
-            <span>Username:</span> {{ profile.username }}
-        </div>
-        {% if profile.first_name %}
-        <div class="account_first_name">
-            <span>First Name:</span> {{ profile.first_name }}
-        </div>
-        {% endif %}
-        {% if profile.last_name %}
-        <div class="account_last_name">
-            <span>Last Name:</span> {{ profile.last_name }}
-        </div>
-        {% endif %}
-        {% if profile.email %}
-        <div class="account_email">
-           <span> Email:</span> {{ profile.email }}
-        </div>
-        {% endif %}
-        <div class="account_update">
-            <a href="{% url 'update-user-profile' profile.id %}">Update Info</a>
-            <a href="{% url 'change-password' %}">Change Password</a>
+<div class="layout-container">
+    <div class="account-container">
+        <div class="account-info flex-center">
+            <h1>Profile Info</h1>
+            <div class="flex-center">
+                <span>Username:</span> {{ profile.username }}
+            </div>
+            {% if profile.first_name %}
+            <div class="flex-center">
+                <span>First Name:</span> {{ profile.first_name }}
+            </div>
+            {% endif %}
+            {% if profile.last_name %}
+            <div class="flex-center">
+                <span>Last Name:</span> {{ profile.last_name }}
+            </div>
+            {% endif %}
+            {% if profile.email %}
+            <div class="flex-center">
+            <span> Email:</span> {{ profile.email }}
+            </div>
+            {% endif %}
+            <div class="flex-center-row">
+                <a class="account-update" href="{% url 'update-user-profile' profile.id %}">Update Info</a>
+                <a class="account-password" href="{% url 'change-password' %}">Change Password</a>
+            </div>
         </div>
     </div>
 </div>
