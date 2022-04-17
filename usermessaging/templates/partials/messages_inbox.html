@@ -1,22 +1,20 @@
 
-   <div class="messages_container" hx-get="{% url 'message_inbox' %}" hx-trigger="every 5s">
+   <div class="mail-container" hx-get="{% url 'message_inbox' %}" hx-trigger="every 5s">
         <h1>My Inbox</h1>
-        <div class="inbox_container">
             <table class="profile_message">
-                <tr class="profile_message_labels">
+                <tr class="profile-message-labels">
                     <td>From</td>
                     <td>Subject</td>
-                    <td>Sent</td>
-                    <td>Read</td>
+                    <td class="mail-date">Sent</td>
+                    <td class="mail-read">Read</td>
                 </tr>
                 {% for message in object_list %}
-                    <tr class='profile_message_content'>
+                    <tr class='profile-message-content'>
                             <td><a href="{% url 'user-detail' message.sender.id %}">{{message.sender.username}}</a></td>
                             <td><a href="{% url 'message_detail_inbox' message.id %}">{{message.subject}}</a></td>
-                            <td><a href="{% url 'message_detail_inbox' message.id %}">{{message.created_on}}</a></td>
-                            <td><a href="{% url 'message_detail_inbox' message.id %}">{{message.is_read}}</a></td>
+                            <td class="mail-date"><a href="{% url 'message_detail_inbox' message.id %}">{{message.created_on|date:'H:i Y-m-d'}}</a></td>
+                            <td class="mail-read"><a href="{% url 'message_detail_inbox' message.id %}">{{message.is_read}}</td>
                     </tr>
                 {% endfor %}
             </table>
-        </div>
     </div>

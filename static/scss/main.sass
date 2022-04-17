@@ -417,3 +417,52 @@ header
     
     .messages-display
         margin-top: 1em
+
+
+.mail-container
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    .profile-message-labels
+        border-bottom: 1px solid $text-color
+        td
+            padding: .25em
+
+    .profile-message-content td
+        padding: .25em
+
+    .profile-message-content .mail-date
+        font-size: .75em
+
+    .profile-message-content:hover
+        background-color: $secondary
+
+    h1
+        font-size: 1.5em
+        margin-top: 1em
+        margin-bottom: 1em
+    table
+        layout: fixed
+        border-collapse: collapse
+        text-align: center
+    
+    a 
+        color: $text-color
+        text-decoration: none
+        display: block
+        height: 100%
+        width: 100%
+
+    @media (min-width: 800px)
+
+        table
+            width: 700px
+    
+    @media (max-width: 600px)
+        .mail-read
+            display: none
+    @media (max-width: 450px)
+        .mail-date
+            display: none
