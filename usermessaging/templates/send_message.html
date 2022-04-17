@@ -2,21 +2,23 @@
 
 
 {% block content %}
+<div class="layout-container">
+    <div class="background-container">
+        <div class="form-container">
+            <form action="" method="post" class="form-layout">
+                <h1>Send {{ recipient.username }} a message: </h1>
+                {% csrf_token %}
 
-    <div class="form-container">
-        <h1>Send a message to: {{ recipient.username }}</h1>
-        <form action="" method="post">
-            {% csrf_token %}
+                {{ form }}
 
-            {{ form }}
-
-            <div class="form-controls">
-                <a href="" class="go-back">Go Back</a>
-                <button type="submit">Send Message</button>
-            </div>
-        </form>
-
+                <div class="form-controls">
+                    <a href="" class="go-back">Go Back</a>
+                    <button type="submit">Send Message</button>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 
 
 {% endblock %}

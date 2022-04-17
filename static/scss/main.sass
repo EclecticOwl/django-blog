@@ -44,15 +44,25 @@ body
     justify-content: center
     align-items: center
     overflow-wrap: break-word
+    width: 100%
     input
         height: 2em
         padding: 1em
         border: none
         outline: none
         border-radius: 1em
-        width: 100%
+        max-width: 100%
+        width: 300px
         box-shadow: $boxshadow2
         background-color: $secondary
+    
+    textarea
+        width: 300px
+        max-width: 100%
+        border-radius: 1em
+        background-color: $secondary
+        box-shadow: $boxshadow2
+    
     
     .form-controls
         margin-top: 1em
