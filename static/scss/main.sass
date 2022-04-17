@@ -8,7 +8,6 @@ $confirm: limegreen
 $back: firebrick
 $update: #2b7192
 
-
 *
     margin: 0
     padding: 0
@@ -55,15 +54,12 @@ body
         width: 300px
         box-shadow: $boxshadow2
         background-color: $secondary
-    
     textarea
         width: 300px
         max-width: 100%
         border-radius: 1em
         background-color: $secondary
         box-shadow: $boxshadow2
-    
-    
     .form-controls
         margin-top: 1em
 
@@ -116,18 +112,14 @@ header
     @media (max-width: 850px) 
         .main-links
             display: none
-
 .hamburger 
 	display: block
 	width: 35px
 	cursor: pointer
-	
 	appearance: none
 	background: none
 	outline: none
 	border: none
-
-
 .hamburger .bar, .hamburger:after, .hamburger:before 
 	content: ''
 	display: block
@@ -136,20 +128,12 @@ header
 	background-color: $text-color
 	margin: 6px 0px
 	transition: 0.4s
-
-
 .hamburger.is-active:before 
 	transform: rotate(-45deg) translate(-8px, 6px)
-
-
 .hamburger.is-active:after 
 	transform: rotate(45deg) translate(-9px, -8px)
-
-
 .hamburger.is-active .bar 
 	opacity: 0
-
-
 .mobile-nav 
 	position: fixed
 	top: 0
@@ -161,12 +145,8 @@ header
 	background-color: $base
 	padding-top: 120px
 	transition: 0.4s
-
-
 .mobile-nav.is-active 
 	left: 0
-
-
 .mobile-nav a 
 	display: block
 	width: 100%
@@ -175,23 +155,15 @@ header
 	text-align: center
 	padding: 12px 16px
 	background-color: $base
-
 	color: $text-color
 	text-decoration: none
-
-
 .mobile-nav a:hover 
 	background-color: $teritary
-
-
 @media (min-width: 849px) 
 	.mobile-nav 
 		display: none
-	
-
 	.hamburger 
-		display: none
-	
+		display: none	
 // Base Layer
 .messages
     position: absolute
@@ -202,22 +174,18 @@ header
     padding: .5em 1em
     list-style-type: none
     background-color: $base
-    border-radius: 2em
-    
+    border-radius: 2em  
     div
         display: flex
-        gap: 1em
-    
+        gap: 1em   
     li:hover
         cursor: pointer
-
 // Index
 .layout-container
     margin-top: 100px
     margin-left: 1em
     margin-right: 1em
     padding: 0 .5em
-
     .form-container
         display: flex
         flex-direction: column
@@ -225,24 +193,18 @@ header
         justify-content: center
         align-items: center
         gap: 1.5em
-
-
         .flex-center
             background-color: $base
             padding: 1em
             border-radius: 1em
             box-shadow: $boxshadow
             gap: 1em
-        
-
         .new-post
             display: flex
             flex-direction: column
             justify-content: center
             align-items: center
             gap: 1em
-        
-
             input
                 height: 2em
                 padding: 1em
@@ -250,7 +212,6 @@ header
                 outline: none
                 width: 200px
                 box-shadow: $boxshadow2
-
             button
                 text-align: center
                 font-size: 1em
@@ -260,18 +221,15 @@ header
                 border-radius: 2em
                 box-shadow: $boxshadow2
                 width: 200px
-        
     @media (max-width: 700px) 
         .new-post div
             display: flex
             flex-direction: column
-            padding: 0 2em
-            
+            padding: 0 2em  
     .feed
         margin-top: 1em
         display: flex
         gap: 1em
-
     .post
         background-color: $base
         min-width: 350px
@@ -279,17 +237,14 @@ header
         border-radius: 1em
         box-shadow: $boxshadow2
         padding: 1em
-
         .post-body
             background-color: $secondary
             border-radius: 1em
             padding: .25em 1em
             margin-bottom: 0.5em
-            width: 300px
-        
+            width: 300px      
         span
-            font-size: .5em
-        
+            font-size: .5em     
         a
             color: $text-color
             text-decoration: none
@@ -398,24 +353,18 @@ header
     display: flex
     justify-content: center
     align-items: center
-
-
     .message-layout
         display: flex
         justify-content: center
         align-items: center
-        width: 700px
-
-        
+        width: 700px    
         .background-container
-            width: 100%
-        
+            width: 100% 
     .messages-control
         display: flex
         justify-content: center
         align-items: center
         gap: 1em
-
         button
             font-size: inherit
             background-color: $update
@@ -425,34 +374,26 @@ header
             width: 100px
             color: $text-color
             box-shadow: $boxshadow2
-    
     .messages-display
         margin-top: 1em
-    
     .message-header
         display: flex
         flex-direction: column
-        
         p
             font-size: .75em
-    
     .message-content
         background-color: $secondary
         padding: 1em
         border-radius: 1em
         box-shadow: $boxshadow2
-
         p
             margin-top: 2em
-
     @media (max-width: 750px)
         .message-layout
             width: 90%
     @media (max-width: 400px)
         .message-layout
             width: 100%
-
-
 
 .mail-container
     display: flex
@@ -464,16 +405,12 @@ header
         border-bottom: 1px solid $text-color
         td
             padding: .25em
-
     .profile-message-content td
         padding: .25em
-
     .profile-message-content .mail-date
         font-size: .75em
-
     .profile-message-content:hover
         background-color: $secondary
-
     h1
         font-size: 1.5em
         margin-top: 1em
@@ -482,19 +419,15 @@ header
         layout: fixed
         border-collapse: collapse
         text-align: center
-    
     a 
         color: $text-color
         text-decoration: none
         display: block
         height: 100%
         width: 100%
-
     @media (min-width: 800px)
-
         table
             width: 700px
-    
     @media (max-width: 600px)
         .mail-read
             display: none
