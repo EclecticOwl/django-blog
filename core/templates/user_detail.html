@@ -3,39 +3,43 @@
 
 {% block content %}
 
-<div class="account-container">
-    <div class="account-info">
-        <h1>Account Information</h1>
-        <div class="account-username">
-            <span>Username:</span> {{ profile.username }}
-            {% if request.user.profile in profile.followers.all %}
-            <form action="" method="post">
-                {% csrf_token %}
-                <button class='profile_unfollow' type="submit">Unfollow</button>
-            </form>
-            {% else %}
-            <form action="" method="post">
-                {% csrf_token %}
-                <button class='profile_follow' type="submit">Follow</button>
-            </form>
+<div class="layout-container">
+    <div class="account-container">
+        <div class="account-info">
+            <h1>Account Information</h1>
+            <div class="account-username">
+                <span>Username:</span> {{ profile.username }}
+                <div class="account-controls">
+                    {% if request.user.profile in profile.followers.all %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <button class='profile-unfollow' type="submit">Unfollow</button>
+                    </form>
+                    {% else %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <button class='profile-follow' type="submit">Follow</button>
+                    </form>
+                    {% endif %}
+                    <a href="{% url 'send_message' profile.id%}">Send Message</a>
+                </div>
+            </div>
+            {% if profile.first_name %}
+            <div class="account-first-name">
+                <span>First Name:</span> {{ profile.first_name }}
+            </div>
             {% endif %}
-            <a href="{% url 'send_message' profile.id%}">Send Message</a>
+            {% if profile.last_name %}
+            <div class="account-last-name">
+                <span>Last Name:</span> {{ profile.last_name }}
+            </div>
+            {% endif %}
+            {% if profile.email %}
+            <div class="account-email">
+            <span> Email:</span> {{ profile.email }}
+            </div>
+            {% endif %}
         </div>
-        {% if profile.first_name %}
-        <div class="account-first-name">
-            <span>First Name:</span> {{ profile.first_name }}
-        </div>
-        {% endif %}
-        {% if profile.last_name %}
-        <div class="account-last-name">
-            <span>Last Name:</span> {{ profile.last_name }}
-        </div>
-        {% endif %}
-        {% if profile.email %}
-        <div class="account-email">
-           <span> Email:</span> {{ profile.email }}
-        </div>
-        {% endif %}
     </div>
 </div>
 
