@@ -3,20 +3,24 @@
 
 {% block content %}
 
-<div class="form-container">
-    <h1>Sign Up</h1>
-    <form action="" method="post">
-        {% csrf_token %}
-    
-    
-        {{ form }}
-        
+<div class="layout-container">
+    <div class="form-container">
+        <div class="background-container">
+            <form action="" method="post" class="form-layout">
+                <h1>Sign Up</h1>
+                {% csrf_token %}
+            
+            
+                {{ form }}
+                
 
-        <div class="form-controls">
-            <a href="{% url 'index' %}" class="go-back">Go Back</a>
-            <button type="submit">Sign Up</button>
+                <div class="form-controls">
+                    <a href="{% url 'index' %}" class="go-back">Go Back</a>
+                    <button type="submit">Sign Up</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 
 {% endblock content %}
