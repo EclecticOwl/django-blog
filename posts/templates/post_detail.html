@@ -2,14 +2,17 @@
 
 
 {% block content %}
-<div class="post_container">
-    <h1>Post</h1>
-    <h2>
-        {{post.owner}}
-    </h2>
-    <p>
-        {{post.content}}
-        {{post.created}}
-    </p>
+
+<div class="layout-container">
+    <div class="posts-container">
+        <div class="background-container flex-center">
+            <h1>Post Details</h1>
+            <h2>
+                {{post.owner}}
+            </h2>
+            <p>said: "{{post.content}}"</p>
+            <p>on: {{post.created}}</p>
+        </div>
+    </div>
 </div>
 {% endblock %}
