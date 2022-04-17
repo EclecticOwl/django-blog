@@ -262,9 +262,11 @@ header
 
     .post
         background-color: $base
-        width: 350px
+        min-width: 350px
+        max-width: 800px
         border-radius: 1em
         box-shadow: $boxshadow2
+        padding: 1em
 
         .post-body
             background-color: $secondary
@@ -345,4 +347,37 @@ header
     border-radius: 1em
     box-shadow: $boxshadow
     
+// Posts
+.posts-container
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 1em
+    
+    .posts
+        display: flex
+        flex-direction: column
+        gap: 1em
+    .post-controls a
+        padding: .5em
+        border-radius: 1em
+        width: 200px
+    
+    .post-edit
+        background-color: $update
+
+    .post-delete
+        background-color: $back
+    
+    @media (max-width: 700px)
+        .post-controls
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            gap: 1em
+            text-align: center
+        .post-controls a
+            padding: .25em
     

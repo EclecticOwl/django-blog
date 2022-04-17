@@ -2,28 +2,29 @@
 
 {% block content %}
 
-<div class="my_posts_container">
-    <h1>Post History:</h1>
-
-    <div class="posts">
-        {% for post in object_list %}
-            <div class="post">
-                <a href="{% url 'post-detail' post.id %}"> 
-                <h3>You posted:</h2>
-                    <div class='post_description'>
-                        Subject: {{post.description}}
+<div class="layout-container">
+    <div class="posts-container">
+        <h1>Post History:</h1>
+        <div class="posts">
+            {% for post in object_list %}
+                <div class="post">
+                    <a href="{% url 'post-detail' post.id %}"> 
+                    <h3>You posted:</h2>
+                        <div class='post_description'>
+                            Subject: {{post.description}}
+                        </div>
+                        <div class='post_body'>
+                            <p>"{{post.content}}"</p>
+                            <span> on: {{post.created}}</span>
+                        </div>
+                    </a>
+                    <div class='post-controls'>
+                        <a class="post-edit" href="{% url 'post-update' post.id %}">Edit this post</a>
+                        <a class="post-delete" href="{% url 'post-delete' post.id %}">Delete this post</a>
                     </div>
-                    <div class='post_body'>
-                        <p>"{{post.content}}"</p>
-                        <span> on: {{post.created}}</span>
-                    </div>
-                </a>
-                <div class='post_controls'>
-                    <a class="post_edit" href="{% url 'post-update' post.id %}">Edit this post</a>
-                    <a class="post_delete" href="{% url 'post-delete' post.id %}">Delete this post</a>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </div>
 
