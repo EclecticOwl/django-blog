@@ -28,7 +28,7 @@ jobs:
         
     - name: Run Tests
       env:
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
         pipenv run coverage run --omit=*/venv/*,*/migrations/* manage.py test
         pipenv run coverage report
