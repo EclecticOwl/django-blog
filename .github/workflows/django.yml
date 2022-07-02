@@ -28,5 +28,5 @@ jobs:
         
     - name: Run Tests
       run: |
-        coverage run --omit=*/venv/*,*/migrations/* manage.py test
-        coverage report
+        pipenv run coverage run --omit=*/venv/*,*/migrations/* manage.py test
+        pipenv run coverage report
