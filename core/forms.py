@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from .models import Profile, Theme
+from .models import Profile
 
 class ProfileForm(ModelForm):
     class Meta:
@@ -11,6 +11,5 @@ class ProfileForm(ModelForm):
 
 class ThemeForm(ModelForm):
     class Meta:
-        model = Theme
-
-        fields = ['theme_choice']
+        model = Profile
+        fields = ['theme']

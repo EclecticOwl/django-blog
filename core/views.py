@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -129,7 +128,7 @@ class ChangePassView(LoginRequiredMixin, PasswordChangeView):
 
 
 def UpdateTheme(request):
-    theme = request.user.profile.theme
+    theme = request.user.profile
     form = ThemeForm(instance=theme)
 
     if request.method == 'POST':

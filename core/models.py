@@ -1,8 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
-
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
+
+
+THEME_CHOICES = [
+    ('dm', 'main'),
+    ('lm', 'light')
+]
 
 
 class Profile(models.Model):
@@ -11,29 +17,14 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField(max_length=300, blank=True, null=True)
     username = models.CharField(max_length=200, blank=True, null=True)
-
+    theme = models.CharField(choices=THEME_CHOICES, max_length=100, default='main')
     following = models.ManyToManyField('self', symmetrical=False, related_name='followers', blank=True)
 
     def __str__(self):
         return self.username
 
 
-THEME_CHOICES = [
-    ('dm', 'main'),
-    ('lm', 'light')
-]
-
-class Theme(models.Model):
-    user = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name='theme')
-    theme_choice = models.CharField(choices=THEME_CHOICES, max_length=100, default='main')
-
-
-    def __str__(self):
-        return self.theme_choice
-
-
 # The following is for signals to connect the user model and the profile model
-
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
