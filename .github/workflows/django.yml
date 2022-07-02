@@ -28,6 +28,6 @@ jobs:
         
     - name: Run Tests
       run: |
-        export SECRET_KEY=${{ secrets.SECRET_KEY }}
+        export SECRET_KEY=${{ secrets.SUPER_VALUE }}
         pipenv run coverage run --omit=*/venv/*,*/migrations/* manage.py test
         pipenv run coverage report
