@@ -10,12 +10,14 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    environment: django-blog
     strategy:
       max-parallel: 4
       matrix:
         python-version: [3.10.2]
 
     steps:
+
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
@@ -27,6 +29,7 @@ jobs:
         pipenv install --three
         
     - name: Run Tests
+
       run: |
         export SECRET_KEY=${{ secrets.SUPER_VALUE }}
         pipenv run coverage run --omit=*/venv/*,*/migrations/* manage.py test
