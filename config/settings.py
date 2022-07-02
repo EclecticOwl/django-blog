@@ -1,22 +1,14 @@
 from pathlib import Path
 import os
-import environ
-
-env = environ.Env()
-
-environ.Env.read_env()
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-DEBUG = True
+DEBUG = False
 
 
-# SECURITY WARNING: keep the secret key used in production secret!
-if DEBUG == True:
-    SECRET_KEY = 'kdajldk#ldiu9DD/'
-else:
-    SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
