@@ -1,0 +1,448 @@
+$base: rgba(0, 0, 0, 0.608)
+$secondary: rgb(255, 255, 255)
+$teritary: rgba(0, 0, 0, .900)
+$text-color: white
+$boxshadow: 0 .25em 1em $base
+$boxshadow2: 0 .2em .2em $base
+$confirm: limegreen
+$back: firebrick
+$update: #2b7192
+
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+
+body 
+    color: $text-color
+    background-color: $secondary
+    font-family: 'Poppins', sans-serif
+    line-height: 2em
+    font-size: 1.2em
+
+// Utility Classes
+.flex-center
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.flex-center-row
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+
+.container 
+    width: 100%
+    display: flex
+    padding: 1em
+.form-layout
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    overflow-wrap: break-word
+    width: 100%
+    input
+        height: 2em
+        padding: 1em
+        border: none
+        outline: none
+        border-radius: 1em
+        max-width: 100%
+        width: 300px
+        box-shadow: $boxshadow2
+        background-color: $secondary
+    textarea
+        width: 300px
+        max-width: 100%
+        border-radius: 1em
+        background-color: $secondary
+        box-shadow: $boxshadow2
+    .form-controls
+        margin-top: 1em
+
+        .go-back, button
+            text-align: center
+            font-size: 1em
+            padding: .5em 1em
+            color: $text-color
+            border-radius: 2em
+            box-shadow: $boxshadow2
+            width: 200px
+        
+        .go-back
+            background-color: $back
+            text-decoration: none
+
+        button
+            background-color: $confirm
+    @media (max-width: 700px)
+        .form-controls
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            gap: 1em
+
+// Navbar
+header 
+	color: #FFF
+	position: fixed
+	top: 0
+	left: 0
+	width: 100%
+	z-index: 99
+.nav
+    display: flex
+    justify-content: space-between
+    align-items: center
+    background-color: $base
+    box-shadow: $boxshadow
+
+    .main-links
+        ul
+            display: flex
+            list-style-type: none
+            gap: 1em
+        a 
+            color: $text-color
+            text-decoration: none
+    @media (max-width: 850px) 
+        .main-links
+            display: none
+.hamburger 
+	display: block
+	width: 35px
+	cursor: pointer
+	appearance: none
+	background: none
+	outline: none
+	border: none
+.hamburger .bar, .hamburger:after, .hamburger:before 
+	content: ''
+	display: block
+	width: 100%
+	height: 5px
+	background-color: $text-color
+	margin: 6px 0px
+	transition: 0.4s
+.hamburger.is-active:before 
+	transform: rotate(-45deg) translate(-8px, 6px)
+.hamburger.is-active:after 
+	transform: rotate(45deg) translate(-9px, -8px)
+.hamburger.is-active .bar 
+	opacity: 0
+.mobile-nav 
+	position: fixed
+	top: 0
+	left: 100%
+	width: 100%
+	min-height: 100vh
+	display: block
+	z-index: 97
+	background-color: $secondary
+	padding-top: 120px
+	transition: 0.4s
+.mobile-nav.is-active 
+	left: 0
+.mobile-nav a 
+	display: block
+	width: 100%
+	max-width: 200px
+	margin: 0 auto 16px
+	text-align: center
+	padding: 12px 16px
+	background-color: $base
+	color: $text-color
+	text-decoration: none
+.mobile-nav a:hover 
+	background-color: $teritary
+@media (min-width: 849px) 
+	.mobile-nav 
+		display: none
+	.hamburger 
+		display: none	
+// Base Layer
+.messages
+    position: absolute
+    bottom: 0
+    right: 0
+    margin-bottom: .5em
+    margin-right: .5em
+    padding: .5em 1em
+    list-style-type: none
+    background-color: $base
+    border-radius: 2em  
+    div
+        display: flex
+        gap: 1em   
+    li:hover
+        cursor: pointer
+// Index
+.layout-container
+    margin-top: 100px
+    margin-left: 1em
+    margin-right: 1em
+    padding: 0 .5em
+    .form-container
+        display: flex
+        flex-direction: column
+        padding: .1em
+        justify-content: center
+        align-items: center
+        gap: 1.5em
+
+        select
+            font-size: 1em
+            font-family: inherit
+            line-height: inherit
+            padding: .5em
+            width: 125px
+            border-radius: 1em
+            text-align: center
+
+        .flex-center
+            background-color: $base
+            padding: 1em
+            border-radius: 1em
+            box-shadow: $boxshadow
+            gap: 1em
+        .new-post
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            gap: 1em
+            input
+                height: 2em
+                padding: 1em
+                border-radius: 1em
+                outline: none
+                width: 200px
+                box-shadow: $boxshadow2
+            button
+                text-align: center
+                font-size: 1em
+                padding: .5em 1em
+                background-color: $confirm
+                color: $text-color
+                border-radius: 2em
+                box-shadow: $boxshadow2
+                width: 200px
+    @media (max-width: 700px) 
+        .new-post div
+            display: flex
+            flex-direction: column
+            padding: 0 2em  
+    .feed
+        margin-top: 1em
+        display: flex
+        gap: 1em
+    .post
+        background-color: $base
+        min-width: 350px
+        max-width: 800px
+        border-radius: 1em
+        box-shadow: $boxshadow2
+        padding: 1em
+        .post-body
+            background-color: $secondary
+            border-radius: 1em
+            padding: .25em 1em
+            margin-bottom: 0.5em
+            width: 300px      
+        span
+            font-size: .5em     
+        a
+            color: $text-color
+            text-decoration: none
+// Profile
+.account-container
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+
+    .account-info
+        width: minmax(360px, 800px)
+        padding: 2em
+        background-color: $base
+        border-radius: 1em
+        box-shadow: $boxshadow
+        
+        .account-controls
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: flex-start
+            
+            form 
+                display: inline-flex
+            a, button
+                display: block
+                text-align: center
+                font-size: 1em
+                color: $text-color
+                border-radius: 2em
+                box-shadow: $boxshadow2
+                width: 200px
+                height: 2em
+
+            .profile-follow
+                background-color: $confirm
+            .profile-unfollow
+                background-color: $back
+            a
+                background-color: $confirm
+    a
+        color: $text-color
+        text-decoration: none
+        padding: .1em .5em
+        border-radius: 1em
+        box-shadow: $boxshadow2
+        margin-top: 1em
+    
+    .account-update
+        background-color: $update
+    .account-password
+        background-color: $update
+    .account-theme
+        background-color: $update
+    .flex-center-row
+        gap: 1em
+    @media (max-width: 700px)
+        a
+            width: 200px
+            text-align: center
+        .flex-center-row
+            flex-direction: column
+
+
+.background-container
+    background-color: $base
+    padding: 2em
+    border-radius: 1em
+    box-shadow: $boxshadow
+    
+// Posts
+.posts-container
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 1em
+    
+    .posts
+        display: flex
+        flex-direction: column
+        gap: 1em
+    .post-controls a
+        padding: .5em
+        border-radius: 1em
+        width: 200px
+    
+    .post-edit
+        background-color: $update
+
+    .post-delete
+        background-color: $back
+    
+    @media (max-width: 700px)
+        .post-controls
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            gap: 1em
+            text-align: center
+        .post-controls a
+            padding: .25em
+
+
+.messages-container
+    display: flex
+    justify-content: center
+    align-items: center
+    .message-layout
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 700px    
+        .background-container
+            width: 100% 
+    .messages-control
+        display: flex
+        justify-content: center
+        align-items: center
+        gap: 1em
+        button
+            font-size: inherit
+            background-color: $update
+            padding: .5em 1em
+            border: none
+            border-radius: 2em
+            width: 100px
+            color: $text-color
+            box-shadow: $boxshadow2
+    .messages-display
+        margin-top: 1em
+    .message-header
+        display: flex
+        flex-direction: column
+        p
+            font-size: .75em
+    .message-content
+        background-color: $secondary
+        padding: 1em
+        border-radius: 1em
+        box-shadow: $boxshadow2
+        p
+            margin-top: 2em
+    @media (max-width: 750px)
+        .message-layout
+            width: 90%
+    @media (max-width: 400px)
+        .message-layout
+            width: 100%
+
+.mail-container
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    .profile-message-labels
+        border-bottom: 1px solid $text-color
+        td
+            padding: .25em
+    .profile-message-content td
+        padding: .25em
+    .profile-message-content .mail-date
+        font-size: .75em
+    .profile-message-content:hover
+        background-color: $secondary
+    h1
+        font-size: 1.5em
+        margin-top: 1em
+        margin-bottom: 1em
+    table
+        layout: fixed
+        border-collapse: collapse
+        text-align: center
+    a 
+        color: $text-color
+        text-decoration: none
+        display: block
+        height: 100%
+        width: 100%
+    @media (min-width: 800px)
+        table
+            width: 700px
+    @media (max-width: 600px)
+        .mail-read
+            display: none
+    @media (max-width: 450px)
+        .mail-date
+            display: none
