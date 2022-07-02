@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Django Blog</title>
     {% if request.user.is_authenticated %}
-    {% if request.user.profile.theme.theme_choice == 'dm' %}
+    {% if request.user.profile.theme == 'dm' %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     {% else %}
     <link rel="stylesheet" href="{% static 'css/light.css'%}">
