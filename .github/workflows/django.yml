@@ -27,8 +27,7 @@ jobs:
         pipenv install --three
         
     - name: Run Tests
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
+        export SECRET_KEY=${{ secrets.SECRET_KEY }}
         pipenv run coverage run --omit=*/venv/*,*/migrations/* manage.py test
         pipenv run coverage report
